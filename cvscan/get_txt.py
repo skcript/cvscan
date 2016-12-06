@@ -8,7 +8,7 @@ import re
 import logging
 
 # for converting pdfs to text
-from pdfminer.converter import TextConverter
+from pdfminer.converter import TextConverter, HTMLConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
@@ -40,7 +40,7 @@ def pdf_to_txt(file_name):
     return_string = StringIO()
     codec = 'utf-8'
     laparams = LAParams()
-    device = TextConverter(pdf_resource_manager, return_string, codec=codec, \
+    device = HTMLConverter(pdf_resource_manager, return_string, codec=codec, \
       laparams=laparams)
     interpreter = PDFPageInterpreter(pdf_resource_manager, device)
 
@@ -54,6 +54,8 @@ def pdf_to_txt(file_name):
     pdf_txt = return_string.getvalue()
     return_string.close()
     
+    logging.debug(pdf_txt)
+
     # Formatting removing and replacing special characters
     pdf_txt = pdf_txt.replace("\r", "\n")
     pdf_txt = re.sub(r"\(cid:\d{0,2}\)", " ", pdf_txt)
