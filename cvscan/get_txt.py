@@ -45,7 +45,7 @@ def pdf_to_txt(file_name):
       laparams=laparams)
     interpreter = PDFPageInterpreter(pdf_resource_manager, device)
 
-    for page in PDFPage.get_pages(file_pointer, set(), maxpages=0, password="", \
+    for page in PDFPage.get_pages(file_pointer, set(), maxpages=0, password="",
       caching=True, check_extractable=True):
       interpreter.process_page(page)
     file_pointer.close()
@@ -64,5 +64,5 @@ def pdf_to_txt(file_name):
     return pdf_txt.decode('ascii', errors='ignore')
 
   except Exception, exception_instance:
-    logging.error('Error while converting pdf to txt : '+str(exception_instance))
+    logging.error('Error converting pdf to txt: '+str(exception_instance))
     return ''
