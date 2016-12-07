@@ -8,17 +8,18 @@ import re
 import logging
 
 # for converting pdfs to text
-from pdfminer.converter import TextConverter, HTMLConverter
+from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
-from cStringIO import StringIO  
+from cStringIO import StringIO
 
 logging.basicConfig(level=logging.DEBUG)
 
 __author__ = 'lakshmanaram'
 __license__ = 'http://opensource.org/licenses/MIT'
 __email__ = 'lakshmanaram.n@gmail.com'
+__maintainer__ = 'lakshmanaram'
 
 
 """
@@ -32,7 +33,7 @@ returns string
 def pdf_to_txt(file_name):
   try:
     file_pointer = open(file_name,'rb')
-    
+
     logging.debug("Converting pdf to txt")
 
     # Setting up pdf reader
@@ -40,7 +41,7 @@ def pdf_to_txt(file_name):
     return_string = StringIO()
     codec = 'utf-8'
     laparams = LAParams()
-    device = HTMLConverter(pdf_resource_manager, return_string, codec=codec, \
+    device = TextConverter(pdf_resource_manager, return_string, codec=codec, \
       laparams=laparams)
     interpreter = PDFPageInterpreter(pdf_resource_manager, device)
 
@@ -53,8 +54,8 @@ def pdf_to_txt(file_name):
     # Get full string from PDF
     pdf_txt = return_string.getvalue()
     return_string.close()
-    
-    logging.debug(pdf_txt)
+
+    # logging.debug(pdf_txt)
 
     # Formatting removing and replacing special characters
     pdf_txt = pdf_txt.replace("\r", "\n")
@@ -65,4 +66,3 @@ def pdf_to_txt(file_name):
   except Exception, exception_instance:
     logging.error('Error while converting pdf to txt : '+str(exception_instance))
     return ''
-
