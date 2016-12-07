@@ -5,7 +5,9 @@ A utility to fetch details from the txt format of the resume
 
 """
 import re
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 
 """
 
@@ -27,3 +29,51 @@ def fetch_email(resume_text):
   except Exception, exception_instance:
     logging.error('Issue parsing email: ' + str(exception_instance))
     return []
+
+def fetch_phone(string_to_search):
+  try:
+    regular_expression = re.compile(r"\(?"  # open parenthesis
+                                    r"(\+)?"
+                                    r"(\d{1,3})?"  # International code
+                                    r"\)?"  # close parenthesis
+                                    r"[\s-]{0,1}?"  # separator
+                                    r"(\d{3})"  # 3 digit exchange
+                                    r"[\s\.-]{0,1}"  # separator 
+                                    r"(\d{3})"  # 3 digit exchange
+                                    r"[\s\.-]{0,1}"  # separator 
+                                    r"(\d{4})",  # 4 digit local
+                                    re.IGNORECASE)
+    result = re.search(regular_expression, string_to_search)
+    phone = ''
+    if result:
+      result = result.groups()
+      for part in result:
+        if part:
+          phone += part
+    if phone is '':
+      for i in range(1,10):
+        for j in range(1,10-i):
+          regular_expression = re.compile(r"\(?"  # open parenthesis
+                                          r"(\+)?"
+                                          r"(\d{1,3})?" # Area code
+                                          r"\)?"  # close parenthesis
+                                          r"[\s-]{0,1}?"  # separator
+                                          r"(\d{"+str(i)+"})"
+                                          r"[\s\.-]{0,1}"  # separator 
+                                          r"(\d{"+str(j)+"})"
+                                          r"[\s\.-]{0,1}"  # separator 
+                                          r"(\d{"+str(10-i-j)+"})",
+                                          re.IGNORECASE)
+          result = re.search(regular_expression, string_to_search)
+          if result:
+            result = result.groups()
+            for part in result:
+              if part:
+                phone += part
+          if phone is not '':
+            return phone
+    return phone
+  except Exception, exception_instance:
+    logging.error('Issue parsing phone number: ' + string_to_search + str(exception_instance))
+    return None
+
