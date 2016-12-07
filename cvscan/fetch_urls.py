@@ -39,7 +39,8 @@ def fetch_pdf_urls(file_name):
     for page in pdf_pages:
       if 'Annots' in page.attrs.keys():
         link_object_list = page.attrs['Annots']
-        # Due to implementation of pdfminer the link_object_list can either be the list directly or a PDF Object reference
+        # Due to implementation of pdfminer the link_object_list can either 
+        # be the list directly or a PDF Object reference
         if type(link_object_list) is not list:
           link_object_list = link_object_list.resolve()
         for link_object in link_object_list:

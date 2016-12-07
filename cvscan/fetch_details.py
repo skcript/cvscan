@@ -9,6 +9,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
+__author__ = 'lakshmanaram'
+__license__ = 'http://opensource.org/licenses/MIT'
+__email__ = 'lakshmanaram.n@gmail.com'
+__maintainer__ = 'lakshmanaram'
+
 """
 
 Utility function that fetches emails in the resume.
@@ -18,7 +23,8 @@ returns: list of emails
 """
 def fetch_email(resume_text):
   try:
-    regular_expression = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}", re.IGNORECASE)
+    regular_expression = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}",
+                                    re.IGNORECASE)
     emails = []
     result = re.search(regular_expression, resume_text)
     while result:
@@ -30,6 +36,13 @@ def fetch_email(resume_text):
     logging.error('Issue parsing email: ' + str(exception_instance))
     return []
 
+"""
+
+Utility function that fetches phone number in the resume.
+Params: resume_text type: string
+returns: phone number type:string
+
+"""
 def fetch_phone(string_to_search):
   try:
     regular_expression = re.compile(r"\(?"  # open parenthesis
@@ -74,6 +87,6 @@ def fetch_phone(string_to_search):
             return phone
     return phone
   except Exception, exception_instance:
-    logging.error('Issue parsing phone number: ' + string_to_search + str(exception_instance))
+    logging.error('Issue parsing phone number: ' + string_to_search + 
+      str(exception_instance))
     return None
-
