@@ -7,6 +7,7 @@ A utility to fetch details from the txt format of the resume
 import re
 import pickle
 import logging
+import configurations
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -25,8 +26,7 @@ returns: list of emails
 """
 def fetch_email(resume_text):
   try:
-    regular_expression = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}",
-                                    re.IGNORECASE)
+    regular_expression = re.compile(configurations.regex_email,re.IGNORECASE)
     emails = []
     result = re.search(regular_expression, resume_text)
     while result:
@@ -48,17 +48,7 @@ returns: phone number type:string
 """
 def fetch_phone(resume_text):
   try:
-    regular_expression = re.compile(r"\(?"  # open parenthesis
-                                    r"(\+)?"
-                                    r"(\d{1,3})?"  # International code
-                                    r"\)?"  # close parenthesis
-                                    r"[\s-]{0,1}?"  # separator
-                                    r"(\d{3})"  # 3 digit exchange
-                                    r"[\s\.-]{0,1}"  # separator 
-                                    r"(\d{3})"  # 3 digit exchange
-                                    r"[\s\.-]{0,1}"  # separator 
-                                    r"(\d{4})",  # 4 digit local
-                                    re.IGNORECASE)
+    regular_expression = re.compile(configurations.get_regex_phone(3,3,10),re.IGNORECASE)
     result = re.search(regular_expression, resume_text)
     phone = ''
     if result:
@@ -69,17 +59,7 @@ def fetch_phone(resume_text):
     if phone is '':
       for i in range(1,10):
         for j in range(1,10-i):
-          regular_expression = re.compile(r"\(?"  # open parenthesis
-                                          r"(\+)?"
-                                          r"(\d{1,3})?" # Area code
-                                          r"\)?"  # close parenthesis
-                                          r"[\s-]{0,1}?"  # separator
-                                          r"(\d{"+str(i)+"})"
-                                          r"[\s\.-]{0,1}"  # separator 
-                                          r"(\d{"+str(j)+"})"
-                                          r"[\s\.-]{0,1}"  # separator 
-                                          r"(\d{"+str(10-i-j)+"})",
-                                          re.IGNORECASE)
+          regular_expression = re.compile(configurations.get_regex_phone(i,j,10),re.IGNORECASE)
           result = re.search(regular_expression, resume_text)
           if result:
             result = result.groups()
@@ -119,11 +99,8 @@ def fetch_address(resume_text):
     pincodes = pickle.load(fp)
   with open(address_input_path,'rb') as fp:
     address = pickle.load(fp)
-  
-  # there should be 1 non digit, followed by a whitespace
-  # then pin and trailing whitespace. 
-  # This is to avoid phone numbers being read as pincodes
-  regular_expression = re.compile(r"[^\d][\s\.\-](\d{6})[\s\.]")
+
+  regular_expression = re.compile(configurations.regex_pincode)
   regex_result = re.search(regular_expression,resume_text)
   while regex_result:
     useful_resume_text = resume_text[:regex_result.start()].lower()
