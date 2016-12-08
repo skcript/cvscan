@@ -20,7 +20,7 @@ class Resume:
     if self.resume_text is not '':
       self.fetch_all_details()
   def fetch_all_details(self):
-    self.URLs = annotations_parser.fetch_pdf_urls(self.resume_text)
+    self.URLs = annotations_parser.fetch_pdf_urls(self.file_path)
     self.email = details_parser.fetch_email(self.resume_text)
     self.phone_numbers = details_parser.fetch_phone(self.resume_text)
     self.address = details_parser.fetch_address(self.resume_text)

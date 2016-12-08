@@ -136,7 +136,6 @@ def fetch_address(resume_text):
       return False
     return True
 
-
   result_state = ''
   state_pos = len(resume_text)
   result_district = ''
@@ -158,3 +157,14 @@ def fetch_address(resume_text):
   result_address['district'] = result_district.title()
   result_address['state'] = result_state.title()
   return result_address
+
+
+"""
+
+Utility Function that calculates experience in the resume text
+params: resume_text type:string
+returns: experience type:int
+
+"""
+def calculate_experience(resume_text):
+  
