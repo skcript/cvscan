@@ -134,8 +134,8 @@ def fetch_address(resume_text):
         pincode += str(i)
     if pincode in pincodes:
       result_address['pincode'] = pincode
-      result_address['state'] = address[pincode]['state']
-      result_address['district'] = address[pincode]['district']
+      result_address['state'] = address[pincode]['state'].title()
+      result_address['district'] = address[pincode]['district'].title()
       return result_address
 
     result_address.clear()
