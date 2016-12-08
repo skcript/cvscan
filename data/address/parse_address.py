@@ -21,26 +21,28 @@ with open(data_file) as csvfile:
     pincodes.add(row['Pincode'])
     cur_size = len(pincodes)
     if cur_size != prev_size:
-      # state_name = set()
-      # state_name.add(row['\xef\xbb\xbfStateName'])
+      state_name = row['\xef\xbb\xbfStateName'].lower()
       # district_name = set()
-      # district_name.add(row['DistrictName'])
-      # sub_district_name = set()
-      # sub_district_name.add(row['subdistname'])
-      # address[row['Pincode']] = {'state': state_name, 'district':district_name,
+      # district_name.add(row['DistrictName'].lower())
+      district_name = row['DistrictName'].lower()
+      sub_district_name = set()
+      # if row['locality_detail1'].lower() is not 'na':
+      #   sub_district_name.add(row['locality_detail1'].lower())
+      address[row['Pincode']] = {'state': state_name, 'district':district_name}#,
       # 'sub_district' :sub_district_name }
-      address_keywords = set()
-      address_keywords.add(row['\xef\xbb\xbfStateName'])
-      address_keywords.add(row['DistrictName'])
-      address_keywords.add(row['subdistname'])
-      address[row['Pincode']] = address_keywords
-    else:
-      # address[row['Pincode']]['state'].add(row['\xef\xbb\xbfStateName'])
-      # address[row['Pincode']]['district'].add(row['DistrictName'])
-      # address[row['Pincode']]['sub_district'].add(row['subdistname'])
-      address[row['Pincode']].add(row['\xef\xbb\xbfStateName'])
-      address[row['Pincode']].add(row['DistrictName'])
-      address[row['Pincode']].add(row['subdistname'])
+      # address_keywords = set()
+      # address_keywords.add(row['\xef\xbb\xbfStateName'])
+      # address_keywords.add(row['DistrictName'])
+      # address_keywords.add(row['subdistname'])
+      # address[row['Pincode']] = address_keywords
+    # else:
+      # address[row['Pincode']]['state'].add(row['\xef\xbb\xbfStateName'].lower())
+      # address[row['Pincode']]['district'].add(row['DistrictName'].lower())
+      # if row['locality_detail1'].lower() is not 'na':
+      #   address[row['Pincode']]['sub_district'].add(row['locality_detail1'].lower())
+      # address[row['Pincode']].add(row['\xef\xbb\xbfStateName'])
+      # address[row['Pincode']].add(row['DistrictName'])
+      # address[row['Pincode']].add(row['subdistname'])
 
 # Store pincodes list in pincodes
 with open('pincodes','wb') as fp:
@@ -50,7 +52,6 @@ with open('pincodes','wb') as fp:
 with open('pincode-district-state','wb') as fp:
   pickle.dump(address,fp)
 
-print pincodes
     # regular_expression = re.compile(r"(\d{6})")
     # result = re.search(regular_expression,pincode)
     # if result:

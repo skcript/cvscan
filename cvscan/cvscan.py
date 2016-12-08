@@ -7,7 +7,7 @@ Main program
 
 from get_txt import pdf_to_txt
 from fetch_urls import fetch_pdf_urls
-from fetch_details import fetch_email, fetch_phone
+from fetch_details import fetch_email, fetch_phone, fetch_address
 
 # Will be made interactive at a later point of the development.
 resume_name = raw_input('Enter Resume name to use:')
@@ -27,3 +27,7 @@ print email
 print "\n\nPhone numbers:"
 phone_numbers = fetch_phone(pdf_txt)
 print phone_numbers
+
+print "\n\nAddress:"
+address = fetch_address(pdf_txt)
+print address
