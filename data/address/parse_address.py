@@ -11,6 +11,8 @@ import csv
 import re
 
 pincodes = set()
+district_state = {}
+states = set()
 address = {}
 
 data_file = 'locdetails_15feb16_4.csv'
@@ -22,27 +24,11 @@ with open(data_file) as csvfile:
     cur_size = len(pincodes)
     if cur_size != prev_size:
       state_name = row['\xef\xbb\xbfStateName'].lower()
-      # district_name = set()
-      # district_name.add(row['DistrictName'].lower())
       district_name = row['DistrictName'].lower()
       sub_district_name = set()
-      # if row['locality_detail1'].lower() is not 'na':
-      #   sub_district_name.add(row['locality_detail1'].lower())
-      address[row['Pincode']] = {'state': state_name, 'district':district_name}#,
-      # 'sub_district' :sub_district_name }
-      # address_keywords = set()
-      # address_keywords.add(row['\xef\xbb\xbfStateName'])
-      # address_keywords.add(row['DistrictName'])
-      # address_keywords.add(row['subdistname'])
-      # address[row['Pincode']] = address_keywords
-    # else:
-      # address[row['Pincode']]['state'].add(row['\xef\xbb\xbfStateName'].lower())
-      # address[row['Pincode']]['district'].add(row['DistrictName'].lower())
-      # if row['locality_detail1'].lower() is not 'na':
-      #   address[row['Pincode']]['sub_district'].add(row['locality_detail1'].lower())
-      # address[row['Pincode']].add(row['\xef\xbb\xbfStateName'])
-      # address[row['Pincode']].add(row['DistrictName'])
-      # address[row['Pincode']].add(row['subdistname'])
+      address[row['Pincode']] = {'state': state_name, 'district':district_name}
+      states.add(state_name)
+      district_state[district_name] = state_name
 
 # Store pincodes list in pincodes
 with open('pincodes','wb') as fp:
@@ -52,7 +38,10 @@ with open('pincodes','wb') as fp:
 with open('pincode-district-state','wb') as fp:
   pickle.dump(address,fp)
 
-    # regular_expression = re.compile(r"(\d{6})")
-    # result = re.search(regular_expression,pincode)
-    # if result:
-    #   print (row['pincode'],row['Taluk'],row['Districtname'],row['statename'])
+# Store distric-state dictionaries
+with open('district-states','wb') as fp:
+  pickle.dump(district_state,fp)
+
+# Store states list
+with open('states','wb') as fp:
+  pickle.dump(states,fp)
