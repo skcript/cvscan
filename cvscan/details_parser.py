@@ -7,7 +7,8 @@ A utility to fetch details from the txt format of the resume
 import re
 import pickle
 import logging
-import configurations
+from datetime import date
+import configurations as regex
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -26,7 +27,7 @@ returns: list of emails
 """
 def fetch_email(resume_text):
   try:
-    regular_expression = re.compile(configurations.regex_email,re.IGNORECASE)
+    regular_expression = re.compile(regex.email,re.IGNORECASE)
     emails = []
     result = re.search(regular_expression, resume_text)
     while result:
@@ -48,18 +49,18 @@ returns: phone number type:string
 """
 def fetch_phone(resume_text):
   try:
-    regular_expression = re.compile(configurations.get_regex_phone(3,3,10),re.IGNORECASE)
+    regular_expression = re.compile(regex.get_phone(3,3,10),re.IGNORECASE)
     result = re.search(regular_expression, resume_text)
     phone = ''
     if result:
-      result = result.groups()
+      result = result.group()
       for part in result:
         if part:
           phone += part
     if phone is '':
       for i in range(1,10):
         for j in range(1,10-i):
-          regular_expression = re.compile(configurations.get_regex_phone(i,j,10),re.IGNORECASE)
+          regular_expression =re.compile(regex.get_phone(i,j,10),re.IGNORECASE)
           result = re.search(regular_expression, resume_text)
           if result:
             result = result.groups()
@@ -100,7 +101,7 @@ def fetch_address(resume_text):
   with open(address_input_path,'rb') as fp:
     address = pickle.load(fp)
 
-  regular_expression = re.compile(configurations.regex_pincode)
+  regular_expression = re.compile(regex.pincode)
   regex_result = re.search(regular_expression,resume_text)
   while regex_result:
     useful_resume_text = resume_text[:regex_result.start()].lower()
@@ -167,4 +168,50 @@ returns: experience type:int
 
 """
 def calculate_experience(resume_text):
-  
+  #
+  def get_month_index(month):
+    month_dict = {'jan':1,'feb':2,'mar':3,'apr':4,'may':5,'jun':6,'jul':7,'aug':8,'sep':9,'oct':10,'nov':11,'dec':12}
+    return month_dict[month.lower()]
+
+  try:
+    experience = 0
+    start_month = -1
+    start_year = -1
+    end_month = -1
+    end_year = -1
+    regular_expression = re.compile(regex.date_range,re.IGNORECASE)
+    regex_result = re.search(regular_expression, resume_text)
+    while regex_result:
+      date_range = regex_result.group()
+      print date_range
+      year_regex = re.compile(regex.year)
+      year_result = re.search(year_regex,date_range)
+      if (start_year == -1) or (int(year_result.group()) <= start_year):
+        start_year = int(year_result.group())
+        month_regex = re.compile(regex.months_short,re.IGNORECASE)
+        month_result = re.search(month_regex,date_range)
+        if month_result:
+          current_month = get_month_index(month_result.group())
+          if (start_month == -1) or (current_month < start_month):
+            start_month = current_month
+      if date_range.lower().find('present') != -1:
+        end_month = date.today().month # current month
+        end_year = date.today().year # current year
+      else:
+        year_result = re.search(year_regex,date_range[year_result.end():])
+        if (end_year == -1) or (int(year_result.group()) >= end_year):
+          end_year = int(year_result.group())
+          month_regex = re.compile(regex.months_short,re.IGNORECASE)
+          month_result = re.search(month_regex,date_range)
+          if month_result:
+            current_month = get_month_index(month_result.group())
+            if (end_month == -1) or (current_month > end_month):
+              end_month = current_month
+      resume_text = resume_text[regex_result.end():]
+      regex_result = re.search(regular_expression, resume_text)
+    # print start_month, start_year
+    # print end_month, end_year
+    return end_year - start_year  # Use the obtained month attribute
+  except Exception, exception_instance:
+    logging.error('Issue calculating experience: '+str(exception_instance))
+    return None

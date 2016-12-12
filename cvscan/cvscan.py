@@ -24,6 +24,7 @@ class Resume:
     self.email = details_parser.fetch_email(self.resume_text)
     self.phone_numbers = details_parser.fetch_phone(self.resume_text)
     self.address = details_parser.fetch_address(self.resume_text)
+    self.experience = details_parser.calculate_experience(self.resume_text)
     # TODO: Add more fetch here
   def show_raw_details(self):
     print '==================================================================='
@@ -51,7 +52,9 @@ class Resume:
     print '-------------------------------------------------------------------'
     print self.address
     print '==================================================================='
+    print '\nExperience'
     print '-------------------------------------------------------------------'
+    print str(self.experience) + " years"
     print '==================================================================='
 
 # Will be made interactive at a later point of the development.
@@ -62,3 +65,6 @@ file_name = '../data/input/'+resume_name+'.pdf'
 
 resume = Resume(file_name)
 resume.show_raw_details()
+
+exp = details_parser.calculate_experience(resume.resume_text)
+print exp
