@@ -7,6 +7,8 @@ A utility to convert the given resume into text file.
 import re
 import logging
 
+import configurations as regex
+
 # for converting pdfs to text
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
@@ -59,7 +61,7 @@ def pdf_to_txt(file_name):
 
     # Formatting removing and replacing special characters
     pdf_txt = pdf_txt.replace("\r", "\n")
-    pdf_txt = re.sub(r"\(cid:\d{0,2}\)", " ", pdf_txt)
+    pdf_txt = re.sub(regex.bullet, " ", pdf_txt)
 
     return pdf_txt.decode('ascii', errors='ignore')
 
