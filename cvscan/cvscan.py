@@ -8,6 +8,7 @@ Main program
 import converter 
 import annotations_parser 
 import details_parser 
+import language_parser
 
 class Resume:
   def __init__(self, file_path):
