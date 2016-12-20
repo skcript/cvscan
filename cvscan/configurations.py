@@ -6,12 +6,24 @@ Configurations file
 """
 
 import re
+import os
+
+# Get environment variable or return default value
+def get_env_var(var, default):
+    try:
+        env_var = os.environ[var]
+        return env_var
+    except:
+        return default
+
+def isfile(path):
+    return os.path.isfile(path)
 
 # Regular expressinos used
 bullet = r"\(cid:\d{0,2}\)"
 email = r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}"
 def get_phone(i,j,n):
-  # regex explanation in order: 
+  # regex explanation in order:
   # optional braces open
   # optional +
   # one to three digit optional international code
@@ -28,11 +40,11 @@ not_alpha_numeric = r'[^a-zA-Z\d]'
 number = r'\d+'
 
 # there should be 1 non digit, followed by a whitespace
-# then pin and trailing whitespace. 
+# then pin and trailing whitespace.
 # This is to avoid phone numbers being read as pincodes
 pincode = r"[^\d]"+not_alpha_numeric+"(\d{6})"+not_alpha_numeric
 
-# For finding date ranges 
+# For finding date ranges
 months_short = r'(jan)|(feb)|(mar)|(apr)|(may)|(jun)|(jul)|(aug)|(sep)|(oct)|(nov)|(dec)'
 months_long = r'(january)|(february)|(march)|(april)|(may)|(june)|(july)|(august)|(september)|(october)|(november)|(december)'
 month = r'('+months_short+r'|'+months_long+r')'

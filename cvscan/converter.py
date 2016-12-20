@@ -36,8 +36,6 @@ def pdf_to_txt(file_name):
   try:
     file_pointer = open(file_name,'rb')
 
-    logging.debug("Converting pdf to txt")
-
     # Setting up pdf reader
     pdf_resource_manager = PDFResourceManager()
     return_string = StringIO()

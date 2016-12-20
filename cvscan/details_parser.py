@@ -10,6 +10,8 @@ import logging
 from datetime import date
 import configurations as regex
 
+import dirpath
+
 logging.basicConfig(level=logging.DEBUG)
 
 __author__ = 'lakshmanaram'
@@ -71,7 +73,7 @@ def fetch_phone(resume_text):
             return phone
     return phone
   except Exception, exception_instance:
-    logging.error('Issue parsing phone number: ' + resume_text + 
+    logging.error('Issue parsing phone number: ' + resume_text +
       str(exception_instance))
     return None
 
@@ -84,17 +86,16 @@ returns: address type:dictionary keys:district,state,pincode
 
 """
 def fetch_address(resume_text):
-  pincode_input_path = '../data/address/pincodes'
-  address_input_path = '../data/address/pincode-district-state'
-  states_input = '../data/address/states'
-  district_state_input = '../data/address/district-states'
+  pincode_input_path = dirpath.PKGPATH + '/data/address/pincodes'
+  address_input_path = dirpath.PKGPATH + '/data/address/pincode-district-state'
+  states_input = dirpath.PKGPATH + '/data/address/states'
+  district_state_input = dirpath.PKGPATH + '/data/address/district-states'
   pincodes = set()
   states = set()
   district_states = {}
   address = {}
   result_address = {}
   initial_resume_text = resume_text
-  logging.debug("Fetching pincodes from the resume test")
 
   with open(pincode_input_path, 'rb') as fp:
     pincodes = pickle.load(fp)
@@ -120,14 +121,13 @@ def fetch_address(resume_text):
     resume_text = resume_text[regex_result.end():]
     regex_result = re.search(regular_expression,resume_text)
 
-  logging.debug("Fetching states and districts from the resume test")
   resume_text = initial_resume_text.lower()
 
   with open(states_input,'rb') as fp:
     states = pickle.load(fp)
   with open(district_state_input,'rb') as fp:
     district_states = pickle.load(fp)
-  
+
   # Check if the input is a separate word in resume_text
   def if_separate_word(pos,word):
     if (pos != 0) and resume_text[pos-1].isalpha():
@@ -183,7 +183,6 @@ def calculate_experience(resume_text):
     regex_result = re.search(regular_expression, resume_text)
     while regex_result:
       date_range = regex_result.group()
-      print date_range
       year_regex = re.compile(regex.year)
       year_result = re.search(year_regex,date_range)
       if (start_year == -1) or (int(year_result.group()) <= start_year):
@@ -209,8 +208,7 @@ def calculate_experience(resume_text):
               end_month = current_month
       resume_text = resume_text[regex_result.end():]
       regex_result = re.search(regular_expression, resume_text)
-    # print start_month, start_year
-    # print end_month, end_year
+    
     return end_year - start_year  # Use the obtained month attribute
   except Exception, exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
