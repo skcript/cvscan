@@ -4,6 +4,7 @@ Cvscan command line tool
 """
 
 import click
+import pprint
 
 from cvscan import Cvscan
 
@@ -23,4 +24,4 @@ def parse(name):
     """Watching Redis for key."""
     resume = Cvscan(name)
     resume.parse()
-    resume.show()
+    pprint.pprint(resume.show(), width=1)

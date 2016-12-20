@@ -1,3 +1,4 @@
 nltk==3.2.1
 pdfminer==20140328
 wheel==0.24.0
+pprint

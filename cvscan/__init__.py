@@ -30,65 +30,53 @@ class Cvscan():
     def extract(self):
         # add functions to convert other formats to text
         if self.path.find(".pdf") != -1:
-          self.resume_text = converter.pdf_to_txt(self.path)
+            self.raw_text = converter.pdf_to_txt(self.path)
 
-        if self.resume_text is not '':
-          self.parse()
+        if self.raw_text is not '':
+            self.parse()
+        else:
+            raise ValueError("Error parsing resume.")
 
     def parse(self):
         self.URLs = annotations_parser.fetch_pdf_urls(self.path)
-        self.email = details_parser.fetch_email(self.resume_text)
-        self.phone_numbers = details_parser.fetch_phone(self.resume_text)
-        self.address = details_parser.fetch_address(self.resume_text)
-        self.experience = details_parser.calculate_experience(self.resume_text)
-        self.cleaned_resume = language_parser.clean_resume(self.resume_text)
+        self.emails = details_parser.fetch_email(self.raw_text)
+        self.phone_numbers = details_parser.fetch_phone(self.raw_text)
+        self.address = details_parser.fetch_address(self.raw_text)
+        self.experience = details_parser.calculate_experience(self.raw_text)
+        self.skills = language_parser.clean_resume(self.raw_text)
 
     # TODO: Add more fetch here
     def show(self):
-        print '==================================================================='
-        print '\nFile path:'
-        print '-------------------------------------------------------------------'
-        print self.path
-        print '==================================================================='
-        print '\nResume Text'
-        print '-------------------------------------------------------------------'
-        print self.resume_text
-        print '==================================================================='
-        print '\nURLs'
-        print '-------------------------------------------------------------------'
-        print self.URLs
-        print '==================================================================='
-        print '\nPhone numbers'
-        print '-------------------------------------------------------------------'
-        print self.phone_numbers
-        print '==================================================================='
-        print '\nEmails'
-        print '-------------------------------------------------------------------'
-        print self.email
-        print '==================================================================='
-        print '\nAddress'
-        print '-------------------------------------------------------------------'
-        print self.address
-        print '==================================================================='
-        print '\nExperience'
-        print '-------------------------------------------------------------------'
-        print str(self.experience) + " years"
-        print '==================================================================='
-        print '\nSkills'
-        print '-------------------------------------------------------------------'
-        print self.cleaned_resume
-        print '==================================================================='
-        print '-------------------------------------------------------------------'
-        print '==================================================================='
-
-# def main():
-#   # Will be made interactive at a later point of the development.
-#   resume_name = raw_input('Enter Resume name to use:')
-#   # resume_name = 'lakshmanaram'
-#   file_name = DIRPATH + '/data/input/'+resume_name+'.pdf'
-#   print(file_name)
-#   resume = Cvscan(file_name)
-#   resume.show_raw_details()
-#
-# if __name__ == "__main__":
-#     main()
+        return {
+            "experience" : self.experience,
+            "address" : self.address,
+            "phone_numbers" : self.phone_numbers,
+            "emails" : self.emails,
+            "urls" : self.URLs,
+            "skills" : self.skills
+        }
+        # print '==================================================================='
+        # print '\nURLs'
+        # print '-------------------------------------------------------------------'
+        # print self.URLs
+        # print '==================================================================='
+        # print '\nPhone numbers'
+        # print '-------------------------------------------------------------------'
+        # print self.phone_numbers
+        # print '==================================================================='
+        # print '\nEmails'
+        # print '-------------------------------------------------------------------'
+        # print self.email
+        # print '==================================================================='
+        # print '\nAddress'
+        # print '-------------------------------------------------------------------'
+        # print self.address
+        # print '==================================================================='
+        # print '\nExperience'
+        # print '-------------------------------------------------------------------'
+        # print str(self.experience) + " years"
+        # print '==================================================================='
+        # print '\nSkills'
+        # print '-------------------------------------------------------------------'
+        # print self.skills
+        # print '==================================================================='
