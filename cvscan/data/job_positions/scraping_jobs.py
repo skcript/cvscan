@@ -19,7 +19,8 @@ if __name__ == '__main__':
   job_titles = ws.__getitem__("A")
   job_categories = ws.__getitem__("D")
   for title,category in zip(job_titles[1:],job_categories[1:]):
-    jobs[title.value] = category.value
+    if title.value:
+      jobs[title.value] = category.value
 
   with open('positions','wb') as fp:
     pickle.dump(jobs,fp)

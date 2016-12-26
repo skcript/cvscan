@@ -227,10 +227,12 @@ def fetch_jobs(cleaned_resume):
     jobs = pickle.load(fp)
   
   job_positions = []
-  for job in jobs:
-    if job:
-      job = ' '+job+' '
-      if job.lower() in cleaned_resume:
-        job_positions.append(job)
-  
-  return job_positions
+  positions = []
+  for job in jobs.keys():
+    job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
+    regular_expression = re.compile(job_regex)
+    regex_result = re.search(regular_expression,cleaned_resume)
+    if regex_result:
+      positions.append(regex_result.start())
+      job_positions.append(job)
+  return [job for (pos,job) in sorted(zip(positions,job_positions))]

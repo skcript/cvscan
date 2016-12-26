@@ -313,9 +313,9 @@ g17
 sVexecutive assistant
 p112
 g4
-sVsystems architect
+sVsenior developer
 p113
-g82
+g28
 sVfounder   managing partner
 p114
 g4
@@ -473,1661 +473,1630 @@ g2
 sVindependent consultant
 p166
 g22
-sVtechnical recruiter
-p167
-g17
 sVassistant
-p168
+p167
 g4
 sVassociate director
-p169
+p168
 g4
 sVapplication engineer
-p170
+p169
 g2
 sVco founder cto
-p171
+p170
 g4
 sVvp marketing science
-p172
+p171
 g7
 sVlead consultant
-p173
+p172
 g22
 sVdata scientist   manager
-p174
+p173
 g41
 sVresearch scholar
-p175
+p174
 g49
 sVdirector   solutions marketing
-p176
+p175
 g7
 sVassistant consultant
-p177
+p176
 g22
 sVpresident
-p178
+p177
 g4
 sVanalytics manager
-p179
+p178
 g7
 sVco founder
-p180
+p179
 g4
 sVmanager operations
-p181
+p180
 g7
 sVhadoop developer
-p182
+p181
 g28
 sVtalent management consultant
-p183
+p182
 g22
 sVstaff software engineer
-p184
+p183
 g28
 sVsr  talent acquisition specialist
-p185
+p184
 g17
 sVauthor
-p186
+p185
 g4
 sVsenior data analyst
-p187
+p186
 g4
 sVsales marketing executive
-p188
+p187
 g7
-sVsenior web analyst
-p189
-g4
 sVdivision director
-p190
+p188
 g4
 sVoperations
-p191
+p189
 g7
 sVcommercial director
-p192
+p190
 g4
 sVindependent recruiter
-p193
+p191
 g17
 sVprogram director
-p194
+p192
 g4
 sVweb analyst
-p195
+p193
 g4
 sVpyramid consulting
-p196
+p194
 g4
 sVscientist
-p197
+p195
 g41
 sVco founder   coo
-p198
+p196
 g4
 sVproject director
-p199
+p197
 g4
 sVdirector  account management
-p200
+p198
 g4
-sVdeveloper
-p201
-g28
 sVstatistical associate
-p202
+p199
 g92
 sVresearch fellow
-p203
+p200
 g49
 sVceo   founder
-p204
+p201
 g4
 sVbusiness head
-p205
+p202
 g7
 sVpresident ceo
-p206
+p203
 g4
 sVbi consultant
-p207
+p204
 g22
 sVregional sales manager
-p208
+p205
 g4
 sVexecutive vice president
-p209
+p206
 g4
 sVvp business development
-p210
+p207
 g7
 sVmachine learning specialist
-p211
+p208
 g4
 sVceo
-p212
+p209
 g4
 sVfreelance consultant
-p213
+p210
 g22
 sVkey account manager
-p214
+p211
 g4
 sVadjunct instructor
-p215
+p212
 g4
 sVhr generalist
-p216
+p213
 g4
 sVphd researcher
-p217
+p214
 g49
 sVsenior technical recruiter
-p218
+p215
 g17
 sVteam leader
-p219
+p216
 g4
 sVsenior database developer
-p220
+p217
 g28
 sVbusiness development
-p221
+p218
 g7
 sVtalent acquisition specialist
-p222
+p219
 g17
 sVinvestor
-p223
+p220
 g4
 sVmanager data analytics
-p224
+p221
 g7
 sVowner operator
-p225
+p222
 g4
 sVhuman resources director
-p226
+p223
 g4
 sVtata consultancy services
-p227
+p224
 g4
 sVchief data officer
-p228
+p225
 g4
 sVco founder director
-p229
+p226
 g4
 sVlead solutions architect
-p230
+p227
 g82
 sVassociate consultant
-p231
+p228
 g22
 sVteam lead
-p232
+p229
 g4
 sVdirector product marketing
-p233
+p230
 g7
 sVdata consultant
-p234
+p231
 g22
 sVgroup manager
-p235
+p232
 g4
 sVanalytic consultant
-p236
+p233
 g22
 sVsenior director  marketing analytics
-p237
+p234
 g7
 sVadministrator
-p238
+p235
 g4
 sVchief analytics officer
-p239
+p236
 g7
 sVrisk consultant
-p240
+p237
 g22
 sVsenior manager  analytics
-p241
+p238
 g7
 sVdata anayltics professional
-p242
+p239
 g4
 sVproject manager
-p243
+p240
 g4
 sVsr  director  talent acquisition
-p244
+p241
 g17
 sVvice president  executive recruiter
-p245
+p242
 g17
 sVsr account executive
-p246
+p243
 g4
 sVsr  director
-p247
+p244
 g4
 sVresearch
-p248
+p245
 g49
 sVsystems administrator
-p249
+p246
 g4
 sVsr  project manager
-p250
+p247
 g4
 sVassociate professor
-p251
+p248
 g102
 sVvice president engineering
-p252
+p249
 g2
 sVstatistical analysis manager
-p253
+p250
 g92
 sVceo owner
-p254
+p251
 g4
 sVmba candidate
-p255
+p252
 g4
 sVmarketing specialist
-p256
+p253
 g7
 sVprincipal dev lead
-p257
+p254
 g4
 sVrecruiting manager
-p258
+p255
 g17
 sVprincipal   founder
-p259
+p256
 g4
 sVvisiting professor
-p260
+p257
 g102
 sVassociate
-p261
+p258
 g4
 sVsubject matter expert
-p262
+p259
 g4
 sVdata scientist
-p263
+p260
 g41
 sVsenior director business development
-p264
+p261
 g7
 sVchief operating officer
-p265
+p262
 g4
 sVcollabera
-p266
+p263
 g4
 sVsenior data architect
-p267
+p264
 g82
 sVadvisor
-p268
+p265
 g4
 sVself employed
-p269
+p266
 g4
 sVsenior business intelligence consultant
-p270
+p267
 g22
 sVsr  data scientist
-p271
+p268
 g41
 sVvice president  human resources
-p272
+p269
 g4
 sVdata analyst
-p273
+p270
 g4
 sVanalytic science   scientist ii
-p274
+p271
 g41
 sVsenior researcher
-p275
+p272
 g49
 sVboard advisors
-p276
+p273
 g4
 sVdigital consultant
-p277
+p274
 g22
 sVsenior executive recruiter
-p278
+p275
 g17
 sVstudent
-p279
+p276
 g132
 sVsystems developer analyst
-p280
+p277
 g28
 sVresearcher
-p281
+p278
 g49
 sVmanager   analytics
-p282
+p279
 g7
 sVprincipal scientist
-p283
+p280
 g41
 sVassociate business analyst
-p284
+p281
 g7
 sVsr  talent acquisition consultant
-p285
+p282
 g22
 sVhuman resources business partner
-p286
+p283
 g7
 sVdirector  product management
-p287
+p284
 g4
 sVregional statistician
-p288
+p285
 g92
 sVsales associate
-p289
+p286
 g4
 sVowner
-p290
+p287
 g4
 sVdirector in charge
-p291
+p288
 g4
 sVdirecteur général
-p292
+p289
 g4
 sVengineer
-p293
+p290
 g2
 sVchief technology officer
-p294
+p291
 g4
 sVsoftware development manager
-p295
+p292
 g28
 sVbusiness development director
-p296
+p293
 g7
 sVprincipal member technical staff
-p297
+p294
 g4
 sVmarket research analyst
-p298
+p295
 g49
 sVrisk analyst
-p299
+p296
 g4
 sVadvisory board member
-p300
+p297
 g4
 sVconsultant owner
-p301
+p298
 g22
 sVmachine learning scientist
-p302
+p299
 g41
 sVbiostatistician ii
-p303
+p300
 g92
 sVteacher
-p304
+p301
 g4
 sVadvanced analytics consulting
-p305
+p302
 g7
 sVadvanced analytics
-p306
+p303
 g7
 sVenterprise information architect
-p307
+p304
 g82
 sVph d  candidate
-p308
+p305
 g4
 sVgraduate student
-p309
+p306
 g132
 sVstatistical consultant
-p310
+p307
 g22
 sVinvestment professional
-p311
+p308
 g4
 sVdata mining manager
-p312
+p309
 g4
 sVfounder ceo
-p313
+p310
 g4
 sVlead engineer
-p314
+p311
 g2
 sVowner photographer
-p315
+p312
 g4
 sVcontent manager
-p316
+p313
 g4
 sVexecutive recruiter
-p317
+p314
 g17
 sVsr director engineering
-p318
+p315
 g2
 sVresearch staff member
-p319
+p316
 g49
 sVco founder ceo
-p320
+p317
 g4
 sVmarketing manager
-p321
+p318
 g7
 sVanalytics
-p322
+p319
 g7
 sVlead technical recruiter
-p323
+p320
 g17
 sVnew business development
-p324
+p321
 g7
 sVarchitect
-p325
+p322
 g82
 sVdirector  digital analytics
-p326
+p323
 g7
 sVsystem analyst
-p327
+p324
 g4
 sVmanager customer analytics
-p328
+p325
 g7
 sVsenior principal
-p329
+p326
 g4
 sVsystems analyst
-p330
+p327
 g4
 sVfounder  ceo
-p331
+p328
 g4
 sVadjunct professor
-p332
+p329
 g102
 sVproject leader
-p333
+p330
 g4
 sVsr sas consultant
-p334
+p331
 g22
-sVbooz allen hamilton
-p335
-g4
 sVlecturer researcher
-p336
+p332
 g102
 sVadvanced analytics consultant
-p337
+p333
 g22
 sVfounder   president
-p338
+p334
 g4
 sVchief financial officer
-p339
+p335
 g4
 sVsolutions architect
-p340
+p336
 g82
 sVmathematical statistician
-p341
+p337
 g92
 sVproject lead
-p342
+p338
 g4
 sVchief marketing officer
-p343
+p339
 g7
 sVmanaging consultant
-p344
+p340
 g22
-sVbdi systems technologies pvt ltd
-p345
-g4
 sVchairman
-p346
+p341
 g4
 sVsolutions engineer
-p347
+p342
 g2
 sVstatistical research analyst
-p348
+p343
 g49
 sVdatasciencecentral
-p349
+p344
 g41
 sVsaama technologies
-p350
+p345
 g4
 sVvp sales marketing
-p351
+p346
 g7
 sVprincipal founder
-p352
+p347
 g4
 sVsenior corporate recruiter
-p353
+p348
 g17
 sVsr  consultant
-p354
+p349
 g22
 sVsr  program manager
-p355
+p350
 g4
 sVmanaging partner
-p356
+p351
 g4
 sVsr  account manager
-p357
+p352
 g4
 sVsoftware architect
-p358
+p353
 g82
 sVdata architect
-p359
+p354
 g82
 sVpresident founder
-p360
+p355
 g4
 sVdata science intern
-p361
+p356
 g41
 sVdeputy manager
-p362
+p357
 g4
 sVprofessor
-p363
+p358
 g102
 sVsenior director marketing
-p364
+p359
 g7
 sVceo co founder
-p365
+p360
 g4
 sVquantitative analyst
-p366
+p361
 g4
 sVmicrosoft
-p367
+p362
 g4
 sVmanager analytics
-p368
+p363
 g7
 sVscientific advisor
-p369
+p364
 g4
 sVsenior conference producer
-p370
+p365
 g4
 sVowner director
-p371
+p366
 g4
 sVlead associate
-p372
+p367
 g4
 sVsenior data science analyst
-p373
+p368
 g41
 sVdirector data mining
-p374
+p369
 g4
 sVrecruitment specialist
-p375
+p370
 g17
 sVpartner  analytics
-p376
+p371
 g7
 sVassociate vice president
-p377
+p372
 g4
 sVpost doctoral researcher
-p378
+p373
 g49
 sVeconomist
-p379
+p374
 g4
 sVdata warehouse consultant
-p380
+p375
 g22
 sVsenior marketing analyst
-p381
+p376
 g7
 sVsoftware development engineer ii
-p382
+p377
 g28
 sVdirector business operations
-p383
+p378
 g7
 sVdirector talent
-p384
+p379
 g17
 sVmanager  business analytics
-p385
+p380
 g7
 sVvice president  operations
-p386
+p381
 g7
 sVbusiness development manager
-p387
+p382
 g7
 sVdirector data science
-p388
+p383
 g41
 sVcto   co founder
-p389
+p384
 g4
 sVtechnical business analyst
-p390
+p385
 g7
 sVconsulting director
-p391
+p386
 g4
 sVcorporate recruiter
-p392
+p387
 g17
 sVquality assurance engineer
-p393
+p388
 g2
 sVamazon
-p394
+p389
 g4
 sVtalent acquisition
-p395
+p390
 g17
 sVassociate partner
-p396
+p391
 g4
 sVlead recruiter
-p397
+p392
 g17
 sVvice president operations
-p398
+p393
 g7
 sVsenior account executive
-p399
+p394
 g4
 sVengagement manager
-p400
+p395
 g4
 sVmanagement consultant
-p401
+p396
 g22
 sVtechnical specialist
-p402
+p397
 g4
 sVpostdoctoral research associate
-p403
+p398
 g49
 sVsourcing specialist
-p404
+p399
 g4
 sVsenior statistician
-p405
+p400
 g92
 sVcofounder
-p406
+p401
 g4
 sVbusiness manager
-p407
+p402
 g7
 sVsenior it recruiter
-p408
+p403
 g17
 sVsenior architect
-p409
+p404
 g82
 sVstaff data scientist
-p410
+p405
 g41
 sVdirector business development
-p411
+p406
 g7
 sVsas developer
-p412
+p407
 g28
 sVdirector technology
-p413
+p408
 g4
 sVmember board trustees
-p414
+p409
 g4
 sVsales engineer
-p415
+p410
 g2
-sVdirector   founder
-p416
-g4
 sVsenior director  talent acquisition
-p417
+p411
 g17
 sVeditorial board member
-p418
+p412
 g4
 sVweb analytics manager
-p419
+p413
 g7
 sVdata miner
-p420
+p414
 g4
 sVdata engineer
-p421
+p415
 g2
 sVsenior systems engineer
-p422
+p416
 g2
 sVdmr
-p423
+p417
 g4
 sVweb developer
-p424
+p418
 g28
 sVeditorial director
-p425
+p419
 g4
 sVdata scientist manager
-p426
+p420
 g41
 sVbusiness analytics manager
-p427
+p421
 g7
 sVinformation management specialist
-p428
+p422
 g4
 sVhuman resources manager
-p429
+p423
 g4
 sVvp product marketing
-p430
+p424
 g7
 sVsenior solutions consultant
-p431
+p425
 g22
 sVfounder managing partner
-p432
+p426
 g4
 sVresearch engineer
-p433
+p427
 g49
 sVexecutive director
-p434
+p428
 g4
 sVsenior e recruitment specialist
-p435
+p429
 g17
 sVfounder cto
-p436
+p430
 g4
 sVdirector sales
-p437
+p431
 g4
 sVanalytics consultant
-p438
+p432
 g22
 sVresource manager
-p439
+p433
 g4
 sVvice president  analytics
-p440
+p434
 g7
 sVtechnical advisor
-p441
+p435
 g4
 sVrecruiter
-p442
+p436
 g17
 sVsenior director engineering
-p443
+p437
 g2
 sVpresident   co founder
-p444
+p438
 g4
 sVmccombs school business
-p445
+p439
 g7
 sVsales rep
-p446
+p440
 g4
 sVcoo
-p447
+p441
 g4
 sVsoftware engineer
-p448
+p442
 g28
 sVsenior associate
-p449
+p443
 g4
 sVboard directors
-p450
+p444
 g4
 sVresearch analyst
-p451
+p445
 g49
 sVbusiness intelligence data analyst
-p452
+p446
 g7
 sVdirector integrated marketing
-p453
+p447
 g7
 sVtalent acquisition partner
-p454
+p448
 g17
 sVdata specialist
-p455
+p449
 g4
 sVco founder  ceo
-p456
+p450
 g4
 sVdatabase marketing analyst
-p457
+p451
 g7
 sVsenior data scientist
-p458
+p452
 g41
 sVfounder  president
-p459
+p453
 g4
 sVcontractor
-p460
+p454
 g4
 sVpractice director
-p461
+p455
 g4
 sVprofesor
-p462
+p456
 g4
 sVperformance analyst
-p463
+p457
 g4
 sVcollaborative research
-p464
+p458
 g49
 sVlead statistician
-p465
+p459
 g92
 sVsenior manager
-p466
+p460
 g4
 sVproprietor
-p467
+p461
 g4
 sVsr  analytics consultant
-p468
+p462
 g22
 sVexecutive consultant
-p469
+p463
 g22
 sVregional sales director
-p470
+p464
 g4
 sVsenior lecturer
-p471
+p465
 g102
 sVsystems engineer
-p472
+p466
 g2
 sVbusiness analyst
-p473
+p467
 g7
 sVsr  scientist
-p474
+p468
 g41
 sVquantitative trader
-p475
+p469
 g4
 sVdata science manager
-p476
+p470
 g41
 sVengineering program manager
-p477
+p471
 g2
 sVstatistics   analytics
-p478
+p472
 g7
 sVsenior statistical analyst
-p479
+p473
 g92
 sVcredit risk analyst
-p480
+p474
 g4
 sVinstructor
-p481
+p475
 g4
 sVvp marketing
-p482
+p476
 g7
 sVvolunteer
-p483
+p477
 g4
 sVconsultant
-p484
+p478
 g22
 sVsenior advisor
-p485
+p479
 g4
 sVco founder   director
-p486
+p480
 g4
 sVit business analyst
-p487
+p481
 g7
 sVoperations research analyst
-p488
+p482
 g7
 sVclient relationship manager
-p489
+p483
 g4
 sVportfolio manager
-p490
+p484
 g4
 sVtechnology account manager
-p491
+p485
 g4
 sVfounding partner
-p492
+p486
 g4
 sVindependent
-p493
+p487
 g4
 sVdirector  business analytics
-p494
+p488
 g7
 sVstrategic account manager
-p495
+p489
 g4
 sVavp
-p496
-g4
-sVlinkedin
-p497
+p490
 g4
 sVvp
-p498
-g4
-sVinfosys
-p499
+p491
 g4
 sVsenior consultant
-p500
+p492
 g22
 sVsenior research analyst
-p501
+p493
 g49
 sVsr  manager
-p502
+p494
 g4
 sVpartner
-p503
+p495
 g4
 sVchief science officer
-p504
+p496
 g41
 sVbusiness intelligence engineer
-p505
+p497
 g7
 sVcto co founder
-p506
+p498
 g4
 sVbig data   analytics consultant
-p507
+p499
 g22
 sVvice president business development
-p508
+p500
 g7
 sVrisk manager
-p509
+p501
 g4
 sVgroup director analytics
-p510
+p502
 g7
 sVmarketing analyst
-p511
+p503
 g7
 sVchief data scientist
-p512
+p504
 g41
 sVmember
-p513
+p505
 g4
 sVquant
-p514
+p506
 g4
 sVhr business partner
-p515
+p507
 g7
 sVcognizant technology solutions
-p516
+p508
 g4
 sVbusiness data analyst
-p517
+p509
 g7
 sVbig data developer
-p518
+p510
 g28
 sVsenior director
-p519
+p511
 g4
 sVdata science consultant
-p520
+p512
 g22
 sVvice president marketing
-p521
+p513
 g7
 sVlead data scientist
-p522
+p514
 g41
 sVsenior member technical staff
-p523
+p515
 g4
 sVfounding director
-p524
+p516
 g4
 sVdirector
-p525
+p517
 g4
 sVsenior economist
-p526
+p518
 g4
 sVbig data scientist
-p527
+p519
 g41
 sVsenior technical architect
-p528
+p520
 g82
 sVtechnical lead
-p529
+p521
 g4
 sVfinancial analyst
-p530
+p522
 g4
 sVsales director
-p531
+p523
 g4
 sVdatabase administrator
-p532
+p524
 g4
 sVtechnology recruiter
-p533
+p525
 g17
 sVsr  software engineer
-p534
+p526
 g28
 sVanalytical consultant
-p535
+p527
 g22
-sVquadratic insights pvt  ltd 
-p536
-g4
+sVtechnical recruiter
+p528
+g17
 sVprincipal researcher
-p537
+p529
 g49
 sVprogram manager
-p538
+p530
 g4
 sVprogrammer analyst
-p539
+p531
 g4
 sVsr  account executive
-p540
+p532
 g4
 sVrecruitment consultant
-p541
+p533
 g22
 sVvice president  business development
-p542
+p534
 g7
 sVbig data engineer
-p543
+p535
 g2
 sVmarketing communications consultant
-p544
+p536
 g22
 sVfounder managing principal
-p545
+p537
 g4
 sVresearch assistant
-p546
+p538
 g49
 sVmanager talent acquisition
-p547
+p539
 g17
 sVchief marketing officer (cmo)
-p548
+p540
 g7
 sVfounder director
-p549
+p541
 g4
 sVsenior software development engineer
-p550
+p542
 g28
 sVsenior analytics manager
-p551
+p543
 g7
 sVdelivery manager
-p552
+p544
 g4
 sVapplication developer
-p553
+p545
 g28
 sVtelephone researcher
-p554
+p546
 g49
 sVtalent advisor
-p555
+p547
 g17
 sVsenior data mining consultant
-p556
+p548
 g22
 sVfounder  president   ceo
-p557
+p549
 g4
 sVdirector marketing
-p558
+p550
 g7
 sVanalytics director
-p559
+p551
 g7
 sVbusiness analytics intern
-p560
+p552
 g7
 sVdirector  data science
-p561
+p553
 g41
 sVquality engineer
-p562
+p554
 g2
 sVtechnical architect
-p563
+p555
 g82
 sVdirector  web analytics
-p564
+p556
 g7
 sVdirector operations
-p565
+p557
 g7
 sVsr  talent acquisition partner
-p566
+p558
 g17
-sNg4
+sVsenior web analyst
+p559
+g4
 sVprincipal research manager
-p567
+p560
 g49
 sVconsulting data scientist
-p568
+p561
 g41
 sVanalytics specialist
-p569
+p562
 g7
 sVsenior software engineer
-p570
+p563
 g28
 sVbusiness intelligence manager
-p571
+p564
 g7
 sVdirector analytics
-p572
+p565
 g7
 sVdecision scientist
-p573
+p566
 g41
 sVcommercial analyst
-p574
+p567
 g4
 sVsenior program manager
-p575
+p568
 g4
 sVsenior technical manager
-p576
+p569
 g4
 sVbusiness consultant
-p577
+p570
 g22
 sVsenior analyst
-p578
+p571
 g4
 sVlecturer
-p579
+p572
 g102
 sVattorney
-p580
+p573
 g4
-sVgoogle
-p581
+sVdirector   founder
+p574
 g4
 sVdata scientist   consultant
-p582
+p575
 g22
 sVvice president analytics
-p583
+p576
 g7
 sVvice president
-p584
+p577
 g4
 sVboard member
-p585
+p578
 g4
 sVvisiting assistant professor
-p586
+p579
 g102
 sVexecutive search consultant
-p587
+p580
 g22
 sVstaff scientist
-p588
+p581
 g41
 sVsenior director  product management
-p589
+p582
 g4
 sVbusiness development executive
-p590
+p583
 g7
 sVtalent acquisition manager
-p591
+p584
 g17
-sVhewlett packard
-p592
-g4
 sVmaster student
-p593
+p585
 g132
 sVbusiness intelligence consultant
-p594
+p586
 g22
 sVpostdoctoral researcher
-p595
+p587
 g49
 sVhead marketing
-p596
+p588
 g7
 sVdirector  talent acquisition
-p597
+p589
 g17
 sVsr  hr generalist
-p598
+p590
 g4
 sVnon executive director
-p599
+p591
 g4
 sVsr analyst
-p600
+p592
 g4
 sVvp engineering
-p601
+p593
 g2
 sVsr recruiter
-p602
+p594
 g17
 sVteradata
-p603
+p595
 g4
 sVchief architect
-p604
+p596
 g82
 sVprincipal technical recruiter
-p605
+p597
 g17
 sVmarketing
-p606
+p598
 g7
 sVstatistician
-p607
+p599
 g92
 sVsenior partner
-p608
+p600
 g4
 sVsenior business analyst
-p609
+p601
 g7
 sVenterprise architect
-p610
+p602
 g82
 sVfounder   ceo
-p611
+p603
 g4
 sVlead scientist
-p612
+p604
 g41
 sVtalent acquisition consultant
-p613
+p605
 g22
 sVchief risk officer
-p614
+p606
 g4
 sVmember technical staff
-p615
+p607
 g4
 sVrecruiting consultant
-p616
+p608
 g22
 sVprincipal analytic scientist
-p617
+p609
 g41
 sVmarketing analytics
-p618
+p610
 g7
 sVfounder chairman
-p619
+p611
 g4
 sVios developer
-p620
+p612
 g28
 sVcommunity manager
-p621
+p613
 g4
 sVvp sales   marketing
-p622
+p614
 g7
-sVsenior developer
-p623
-g28
+sVsystems architect
+p615
+g82
 sVhr manager
-p624
+p616
 g4
 sVconsulting
-p625
+p617
 g4
 sVstaff engineer
-p626
+p618
 g2
 sVchief digital officer
-p627
+p619
 g4
 sVcrm analyst
-p628
+p620
 g4
 sVentrepreneur
-p629
+p621
 g4
 sVbusiness owner
-p630
+p622
 g7
 sVregional director
-p631
+p623
 g4
 sVsales executive
-p632
+p624
 g4
 sVsenior recruiting consultant
-p633
+p625
 g22
 sVsr  statistician
-p634
+p626
 g92
 sVsas consultant
-p635
+p627
 g22
 sVmarketing director
-p636
+p628
 g7
 sVexecutive resourcing
-p637
+p629
 g4
 sVaccount manager  team leader
-p638
+p630
 g4
 sVphd candidate
-p639
+p631
 g4
 sVsenior project manager
-p640
+p632
 g4
 sVstrategy consultant
-p641
+p633
 g22
 sVproduct manager
-p642
+p634
 g4
 sVeditor
-p643
+p635
 g4
 sVhead data science
-p644
+p636
 g41
 sVco founder  cto
-p645
+p637
 g4
 sVdirector  business development
-p646
+p638
 g7
 sVdirector  advisory services
-p647
+p639
 g4
 sVhr
-p648
+p640
 g4
 sVassistant professor
-p649
+p641
 g102
 sVsenior research fellow
-p650
+p642
 g49
 sVdata analytics manager
-p651
+p643
 g7
 sVanalytics lead
-p652
+p644
 g7
 sVoperations manager
-p653
+p645
 g7
 sVsenior biostatistician
-p654
+p646
 g92
 sVanalyst
-p655
+p647
 g4
 sVceo president
-p656
+p648
 g4
 sVdirector digital strategy
-p657
+p649
 g4
 sVsenior scientist
-p658
+p650
 g41
 sVbi analyst
-p659
+p651
 g4
 sVcio
-p660
+p652
 g4
 sVintern
-p661
+p653
 g4
 sVsenior recruiter
-p662
+p654
 g17
 sVvp analytics
-p663
+p655
 g7
 sVengineering manager
-p664
+p656
 g2
 sVdirector engineering
-p665
+p657
 g2
 sVpractice head
-p666
+p658
 g4
 sVtalent acquisition research professional
-p667
+p659
 g49
 sVdigital marketing manager
-p668
+p660
 g7
 sVfico
-p669
+p661
 g4
 sVproject consultant
-p670
+p662
 g22
 sVchief technical officer
-p671
+p663
 g4
 sVco founder   ceo
-p672
+p664
 g4
 sVdevelopment manager
-p673
+p665
 g28
 sVsearch consultant
-p674
+p666
 g22
 sVceo   president
-p675
+p667
 g4
 sVdirector consulting services
-p676
+p668
 g4
 sVhuman resources
-p677
+p669
 g4
 sVfacilitator
-p678
+p670
 g4
 sVfellow
-p679
+p671
 g4
 sVcoordinator
-p680
+p672
 g4
 sVprincipal research scientist
-p681
+p673
 g49
 sVsenior recruitment consultant
-p682
+p674
 g22
 sVsenior business analytics specialist
-p683
+p675
 g7
 sVrisk analytics manager
-p684
+p676
 g7
 sVpresident   owner
-p685
+p677
 g4
 sVprogrammer
-p686
+p678
 g4
 sVinvestment manager
-p687
+p679
 g4
 sVvice president sales
-p688
+p680
 g4
 sVvp  data scientist
-p689
+p681
 g41
 sVteaching assistant
-p690
+p682
 g4
 sVfounder   principal
-p691
+p683
 g4
 sVstaffing consultant
-p692
+p684
 g22
 sVdirector  analytics
-p693
+p685
 g7
 sVstrategic advisor
-p694
+p686
 g4
 sVadjunct faculty
-p695
+p687
 g4
 sVdirector product management
-p696
+p688
 g4
 sVchief mentor
-p697
+p689
 g4
 sVsan jose state university
-p698
+p690
 g92
 sVdirector  human resources
-p699
+p691
 g4
 sVchief revenue officer
-p700
+p692
 g4
 sVpostdoctoral associate
-p701
-g4
-sVoracle
-p702
+p693
 g4
 sVprincipal engineer
-p703
+p694
 g2
 sVtechnical manager
-p704
+p695
 g4
 sVagm
-p705
+p696
 g4
 sVsolution architect
-p706
+p697
 g82
 sVfounder   owner
-p707
+p698
 g4
 sVbusiness intelligence developer
-p708
+p699
 g7
 sVpositive bioscience
-p709
+p700
 g41
 sVdirector research
-p710
+p701
 g49
 sVbi developer
-p711
+p702
 g28
 sVaccount manager
-p712
-g4
-sVcapgemini
-p713
+p703
 g4
 sVsystem engineer
-p714
+p704
 g2
 sVhead strategy
-p715
+p705
 g4
 sVresearch development manager
-p716
+p706
 g49
 sVsenior account manager
-p717
+p707
 g4
 sVassistant vice president
-p718
+p708
 g4
 s.
