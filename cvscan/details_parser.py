@@ -213,3 +213,34 @@ def calculate_experience(resume_text):
   except Exception, exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
     return None
+
+"""
+
+Utility function that fetches Job Position from the resume.
+Params: cleaned_resume Type: string
+returns: job_positions Type:List
+
+"""
+def fetch_jobs(cleaned_resume):
+  positions_path = dirpath.PKGPATH + '/data/job_positions/positions'
+  with open(positions_path, 'rb') as fp:
+    jobs = pickle.load(fp)
+  
+  job_positions = []
+  positions = []
+  for job in jobs.keys():
+    job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
+    regular_expression = re.compile(job_regex)
+    regex_result = re.search(regular_expression,cleaned_resume)
+    if regex_result:
+      positions.append(regex_result.start())
+      job_positions.append(job)
+  job_positions = [job for (pos,job) in sorted(zip(positions,job_positions))]
+  hash_jobs = {}
+  for job in job_positions:
+    if jobs[job] in hash_jobs.keys():
+      hash_jobs[jobs[job]] += 1
+    else:
+      hash_jobs[jobs[job]] = 1
+  hash_jobs['Other'] = 0
+  return (job_positions,max(hash_jobs,key=hash_jobs.get))

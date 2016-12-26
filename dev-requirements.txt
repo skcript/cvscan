@@ -1,2 +1,3 @@
+click==6.6
 selenium==3.0.2
-click
+openpyxl==2.4.1

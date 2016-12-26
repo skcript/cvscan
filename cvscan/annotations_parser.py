@@ -44,7 +44,8 @@ def fetch_pdf_urls(file_name):
         for link_object in link_object_list:
           if type(link_object) is not dict:
             link_object = link_object.resolve()
-          links.append(link_object['A']['URI'])
+          if link_object['A']['URI']:
+            links.append(link_object['A']['URI'])
     file_pointer.close()
     return links
 
