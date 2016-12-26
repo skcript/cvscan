@@ -43,7 +43,9 @@ class Cvscan():
         self.phone_numbers = details_parser.fetch_phone(self.raw_text)
         self.address = details_parser.fetch_address(self.raw_text)
         self.experience = details_parser.calculate_experience(self.raw_text)
-        self.skills = language_parser.clean_resume(self.raw_text)
+        self.cleaned_resume = language_parser.clean_resume(self.raw_text)
+        self.skills = language_parser.fetch_skills(self.cleaned_resume)
+        self.job_positions = details_parser.fetch_jobs(self.cleaned_resume)
 
     # TODO: Add more fetch here
     def show(self):
@@ -53,5 +55,6 @@ class Cvscan():
             "phone_numbers" : self.phone_numbers,
             "emails" : self.emails,
             "urls" : self.URLs,
-            "skills" : self.skills
+            "skills" : self.skills,
+            "jobs" : self.job_positions
         }

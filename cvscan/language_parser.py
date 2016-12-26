@@ -42,16 +42,27 @@ def clean_resume(resume_text):
       cleaned_resume.append(word.lower())#stemmer.stem(word))
           
   cleaned_resume = ' '.join(cleaned_resume)
+  return cleaned_resume
 
+
+"""
+
+Utility function that fetches the skills from resume
+Params: cleaned_resume Type: string
+returns: skill_set Type: List
+
+"""
+def fetch_skills(cleaned_resume):
   with open(dirpath.PKGPATH + '/data/skills/skills','rb') as fp:
     skills = pickle.load(fp)
 
   skill_set = []
   for skill in skills:
-    stem_skill = skill.split()
-    for word in skill:
-      stem_skill.append(stemmer.stem(word))
-    stem_skill = ' '.join(stem_skill)
+    # stem_skill = skill.split()
+    # for word in skill:
+    #   stem_skill.append(stemmer.stem(word))
+    # stem_skill = ' '.join(stem_skill)
+    skill = ' '+skill+' '
     if skill.lower() in cleaned_resume:
       skill_set.append(skill)
   return skill_set
