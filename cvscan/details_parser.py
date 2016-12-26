@@ -235,4 +235,12 @@ def fetch_jobs(cleaned_resume):
     if regex_result:
       positions.append(regex_result.start())
       job_positions.append(job)
-  return [job for (pos,job) in sorted(zip(positions,job_positions))]
+  job_positions = [job for (pos,job) in sorted(zip(positions,job_positions))]
+  hash_jobs = {}
+  for job in job_positions:
+    if jobs[job] in hash_jobs.keys():
+      hash_jobs[jobs[job]] += 1
+    else:
+      hash_jobs[jobs[job]] = 1
+  hash_jobs['Other'] = 0
+  return (job_positions,max(hash_jobs,key=hash_jobs.get))

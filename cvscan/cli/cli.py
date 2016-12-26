@@ -26,13 +26,8 @@ def parse(name):
   resume.parse()
   pprint.pprint(resume.show(), width=1)
 
-# @click.group()
-# def skill_operations:
-#     """Operations on skills"""
-#     pass
-
-# @skill_operations.command()
-# @click.option('--skill',default='',help="Enter skill to remove")
+# @main.command()
+# @click.option('--skill','-s', help="Enter skill to remove")
 # def remove_skill(skill):
 #   if skill:
 #     with open(dirpath.PKGPATH + '/data/skills/skills','rb') as fp:
