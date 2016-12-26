@@ -1,2 +1,2 @@
+click==6.6
 selenium==3.0.2
-click

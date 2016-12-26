@@ -213,3 +213,84 @@ def calculate_experience(resume_text):
   except Exception, exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
     return None
+
+"""
+
+Utility function that fetches Job Position from the resume.
+Params: resume_text type: string
+returns: job type:string
+
+"""
+def fetch_job(resume_text):
+  positions_path = dirpath.PKGPATH + '/data/job_positions/positions'
+  
+
+
+  pincodes = set()
+  states = set()
+  district_states = {}
+  address = {}
+  result_address = {}
+  initial_resume_text = resume_text
+
+  with open(pincode_input_path, 'rb') as fp:
+    pincodes = pickle.load(fp)
+  with open(address_input_path,'rb') as fp:
+    address = pickle.load(fp)
+
+  regular_expression = re.compile(regex.pincode)
+  regex_result = re.search(regular_expression,resume_text)
+  while regex_result:
+    useful_resume_text = resume_text[:regex_result.start()].lower()
+    pincode_tuple = regex_result.group()
+    pincode = ''
+    for i in pincode_tuple:
+      if (i <= '9') and (i >= '0'):
+        pincode += str(i)
+    if pincode in pincodes:
+      result_address['pincode'] = pincode
+      result_address['state'] = address[pincode]['state'].title()
+      result_address['district'] = address[pincode]['district'].title()
+      return result_address
+
+    result_address.clear()
+    resume_text = resume_text[regex_result.end():]
+    regex_result = re.search(regular_expression,resume_text)
+
+  resume_text = initial_resume_text.lower()
+
+  with open(states_input,'rb') as fp:
+    states = pickle.load(fp)
+  with open(district_state_input,'rb') as fp:
+    district_states = pickle.load(fp)
+
+  # Check if the input is a separate word in resume_text
+  def if_separate_word(pos,word):
+    if (pos != 0) and resume_text[pos-1].isalpha():
+      return False
+    final_pos = pos+len(word)
+    if ( final_pos !=len(resume_text)) and resume_text[final_pos].isalpha():
+      return False
+    return True
+
+  result_state = ''
+  state_pos = len(resume_text)
+  result_district = ''
+  district_pos = len(resume_text)
+  for state in states:
+    pos = resume_text.find(state)
+    if (pos != -1) and(pos < state_pos) and if_separate_word(pos,state):
+      state_pos = pos
+      result_state = state
+  for district in district_states.keys():
+    pos = resume_text.find(district)
+    if (pos != -1) and (pos < district_pos) and if_separate_word(pos,district):
+      district_pos = pos
+      result_district = district
+  if (result_state is '') and (result_district is not ''):
+    result_state = district_states[result_district]
+
+  result_address['pincode'] = ''
+  result_address['district'] = result_district.title()
+  result_address['state'] = result_state.title()
+  return result_address

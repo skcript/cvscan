@@ -89,7 +89,5 @@ ENV/
 .ropeproject
 
 # test Resume
-data/input/test*
+cvscan/data/sample/test*
 
-# data file used for addresses
-data/address/locdetails_15feb16_4.csv

@@ -21,7 +21,23 @@ def main():
 @main.command()
 @click.option('--name', '-n', help='Redis key to be watched')
 def parse(name):
-    """Watching Redis for key."""
-    resume = Cvscan(name)
-    resume.parse()
-    pprint.pprint(resume.show(), width=1)
+  """Watching Redis for key."""
+  resume = Cvscan(name)
+  resume.parse()
+  pprint.pprint(resume.show(), width=1)
+
+# @click.group()
+# def skill_operations:
+#     """Operations on skills"""
+#     pass
+
+# @skill_operations.command()
+# @click.option('--skill',default='',help="Enter skill to remove")
+# def remove_skill(skill):
+#   if skill:
+#     with open(dirpath.PKGPATH + '/data/skills/skills','rb') as fp:
+#       skills = pickle.load(fp)
+#     if skill not in skills:
+#       print "%s is not present in skills" % skill
+#     else:
+#       skills.remove(skill)
