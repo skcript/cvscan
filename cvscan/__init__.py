@@ -39,6 +39,7 @@ class Cvscan():
 
     def parse(self):
         self.URLs = annotations_parser.fetch_pdf_urls(self.path)
+        self.name = language_parser.fetch_name(self.raw_text)
         self.emails = details_parser.fetch_email(self.raw_text)
         self.phone_numbers = details_parser.fetch_phone(self.raw_text)
         self.address = details_parser.fetch_address(self.raw_text)
@@ -51,6 +52,7 @@ class Cvscan():
     # TODO: Add more fetch here
     def show(self):
         return {
+            "name" : self.name,
             "experience" : self.experience,
             "address" : self.address,
             "phone_numbers" : self.phone_numbers,
