@@ -6,6 +6,7 @@ Utility functions that uses language processing to extract useful information
 """
 import pickle
 import logging
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 import dirpath
@@ -66,3 +67,42 @@ def fetch_skills(cleaned_resume):
     if skill.lower() in cleaned_resume:
       skill_set.append(skill)
   return skill_set
+
+
+"""
+
+Utility function that fetches the current employer from resume
+Params: resume_text Type: string
+returns: current_employer Type: string
+
+"""
+def fetch_emplyer(resume_text, job_positions):
+  organizations = []
+  # get all organizations in the resume_text
+  # if any of this organization is beside a job position, assume it as an emplyer
+  
+  return current_employer
+
+
+"""
+
+Utility function that fetches the Person Name from resume
+Params: resume_text Type: string
+returns: name Type: string
+
+Returns the first Person entity found by tokenizing each sentence
+If no such entities are found, returns "Applicant name couldn't be processed"
+
+"""
+def fetch_name(resume_text):
+  tokenized_sentences = nltk.sent_tokenize(resume_text)
+
+  for sentence in tokenized_sentences:
+    for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(sentence), tagset='universal')):
+      if hasattr(chunk,'label'):# and chunk.label() == 'PERSON':
+        chunk = chunk[0]  
+      (name,tag) = chunk
+      if tag == 'NOUN':
+        return name
+
+  return "Applicant name couldn't be processed"
