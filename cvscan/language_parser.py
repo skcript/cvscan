@@ -143,9 +143,8 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
           lines_back -= 1
         end += 1
       line = temp_resume[start:end].lower()
-
       for org in organizations:
-        if org.lower() in line:
+        if org.lower() in line and org.lower() not in job_positions:
           if 'present' in line:
             if org.lower().capitalize() in employers:
               employers.remove(org.lower().capitalize())
@@ -185,7 +184,18 @@ def fetch_employers(resume_text, job_positions):
     organizations,False)
   current_employers.extend(cur_emps)
   employers.extend(emps)
+
+  with open(dirpath.PKGPATH + 
+    '/data/organizations/explicit_organizations') as fp:
+    organizations = pickle.load(fp)
   
+  cur_emps,emps = fetch_employers_util(resume_text, job_positions,
+    organizations,True)
+  current_employers.extend([emp for emp in cur_emps 
+    if emp not in current_employers])
+  employers.extend([emp for emp in emps 
+    if emp not in employers])
+
   return current_employers,employers
 
 
