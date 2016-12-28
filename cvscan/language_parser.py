@@ -11,6 +11,7 @@ import string
 import re
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+
 import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
@@ -103,7 +104,7 @@ def fetch_all_organizations(resume_text):
         (organization,tag) = chunk[0]
         for noun_phrase in noun_phrases:
           if organization in noun_phrase:
-            organizations.add(noun_phrase)
+            organizations.add(noun_phrase.lower().capitalize())
   
   return organizations
 
@@ -133,7 +134,7 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
       # along with the job line
       start = regex_result.start()
       end = regex_result.end()
-      lines_front = lines_back = 2
+      lines_front = lines_back = 3
       while lines_front != 0 and start != 0:
         if temp_resume[start] == '.':
           lines_front -= 1
@@ -143,9 +144,11 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
           lines_back -= 1
         end += 1
       line = temp_resume[start:end].lower()
+      # print line
       for org in organizations:
         if org.lower() in line and org.lower() not in job_positions:
           if 'present' in line:
+            # print org
             if org.lower().capitalize() in employers:
               employers.remove(org.lower().capitalize())
             if org.lower().capitalize() not in current_employers:
@@ -155,7 +158,7 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
                 current_employers.append(org.lower().capitalize())
           elif org.lower().capitalize() not in employers:
             if priority:
-              current_employers.insert(0,org.lower().capitalize()) 
+              employers.insert(0,org.lower().capitalize())
             else:
               employers.append(org.lower().capitalize()) 
       temp_resume = temp_resume[end:]
@@ -176,10 +179,14 @@ def fetch_employers(resume_text, job_positions):
     resume_text = resume_text.replace(punctuation,'\n')
   resume_text = '. '.join([x for x in resume_text.split('\n') 
     if len(x.rstrip().lstrip())!=0])
+  with open(dirpath.PKGPATH + 
+    '/data/organizations/avoid_organizations') as fp:
+    avoid_organizations = pickle.load(fp)
 
   current_employers = []
   employers = []
-  organizations = fetch_all_organizations(resume_text)
+  organizations = [org for org in fetch_all_organizations(resume_text) 
+  if org not in avoid_organizations]
   cur_emps,emps = fetch_employers_util(resume_text, job_positions,
     organizations,False)
   current_employers.extend(cur_emps)
@@ -188,7 +195,6 @@ def fetch_employers(resume_text, job_positions):
   with open(dirpath.PKGPATH + 
     '/data/organizations/explicit_organizations') as fp:
     organizations = pickle.load(fp)
-  
   cur_emps,emps = fetch_employers_util(resume_text, job_positions,
     organizations,True)
   current_employers.extend([emp for emp in cur_emps 
