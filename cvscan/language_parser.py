@@ -47,6 +47,7 @@ def clean_resume(resume_text):
 
 
 """
+TODO: move this function to the details parser as stem isn't used
 
 Utility function that fetches the skills from resume
 Params: cleaned_resume Type: string
@@ -76,12 +77,52 @@ Params: resume_text Type: string
 returns: current_employer Type: string
 
 """
-def fetch_emplyer(resume_text, job_positions):
-  organizations = []
-  # get all organizations in the resume_text
-  # if any of this organization is beside a job position, assume it as an emplyer
+def fetch_employer(cleaned_resume, resume_text, job_positions):
+  organizations = set()
+  resume_text = resume_text.replace('-','\n').replace('|','\n')
+  resume_text = '. '.join([x for x in resume_text.split('\n') 
+    if len(x.rstrip().lstrip())!=0])
+  print resume_text
+  tokenized_sentences = nltk.sent_tokenize(resume_text)
+  grammar = r"""NP: {<NN|NNP>+}"""
+  parser = nltk.RegexpParser(grammar)
+
+  for sentence in tokenized_sentences:
+    tagged_words = nltk.pos_tag(nltk.word_tokenize(sentence))
+
+    np_chunks = parser.parse(tagged_words)
+    noun_phrases = []
+    for np_chunk in np_chunks:
+      if isinstance(np_chunk,nltk.tree.Tree) and np_chunk.label() == 'NP':
+        noun_phrase = ' '.join([org for (org,tag) in np_chunk.leaves()])
+        noun_phrases.append(noun_phrase)
+    # print noun_phrases
+
+    chunks = nltk.ne_chunk(tagged_words)
+    for chunk in chunks:
+      if hasattr(chunk,'label') and chunk.label() == 'ORGANIZATION':
+        (organization,tag) = chunk[0]
+        for noun_phrase in noun_phrases:
+          if organization in noun_phrase:
+            organizations.add(noun_phrase)
+
+  for job in job_positions:
+    job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
+    regular_expression = re.compile(job_regex)
+    regex_result = re.search(regular_expression,cleaned_resume)
+    while regex_result:
+      positions.append(regex_result.start())
+      job_positions.append(job)
+      regex_result = re.search(regular_expression,cleaned_resume)
+
+  # for org in organization:
   
-  return current_employer
+  # check if organization and job positions go together
+  
+  return organizations
+  # if any of this organization is beside a job position, assume it as an emplyer
+
+  # return current_employer
 
 
 """
@@ -90,13 +131,13 @@ Utility function that fetches the Person Name from resume
 Params: resume_text Type: string
 returns: name Type: string
 
-Returns the first Person entity found by tokenizing each sentence
+Returns the first noun (tried Person entity but couldn't make it work)
+found by tokenizing each sentence
 If no such entities are found, returns "Applicant name couldn't be processed"
 
 """
 def fetch_name(resume_text):
   tokenized_sentences = nltk.sent_tokenize(resume_text)
-
   for sentence in tokenized_sentences:
     for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(sentence), tagset='universal')):
       if hasattr(chunk,'label'):# and chunk.label() == 'PERSON':

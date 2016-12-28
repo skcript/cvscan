@@ -236,11 +236,16 @@ def fetch_jobs(cleaned_resume):
       positions.append(regex_result.start())
       job_positions.append(job)
   job_positions = [job for (pos,job) in sorted(zip(positions,job_positions))]
+
+  # For finding the most frequent job category
   hash_jobs = {}
   for job in job_positions:
     if jobs[job] in hash_jobs.keys():
       hash_jobs[jobs[job]] += 1
     else:
       hash_jobs[jobs[job]] = 1
+  
+  # To avoid the "Other" category from becoming the most frequent one.
   hash_jobs['Other'] = 0
+
   return (job_positions,max(hash_jobs,key=hash_jobs.get))
