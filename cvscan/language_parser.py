@@ -7,6 +7,8 @@ Utility functions that uses language processing to extract useful information
 import pickle
 import logging
 import nltk
+import string
+import re
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 import dirpath
@@ -72,17 +74,14 @@ def fetch_skills(cleaned_resume):
 
 """
 
-Utility function that fetches the current employer from resume
-Params: resume_text Type: string
-returns: current_employer Type: string
+Util function for fetch_employers module to get all the 
+organization names from the resume
+Params: resume_text Type:String
+Output: Set of all organizations Type: Set of strings
 
 """
-def fetch_employer(cleaned_resume, resume_text, job_positions):
+def fetch_all_organizations(resume_text):
   organizations = set()
-  resume_text = resume_text.replace('-','\n').replace('|','\n')
-  resume_text = '. '.join([x for x in resume_text.split('\n') 
-    if len(x.rstrip().lstrip())!=0])
-  print resume_text
   tokenized_sentences = nltk.sent_tokenize(resume_text)
   grammar = r"""NP: {<NN|NNP>+}"""
   parser = nltk.RegexpParser(grammar)
@@ -105,24 +104,89 @@ def fetch_employer(cleaned_resume, resume_text, job_positions):
         for noun_phrase in noun_phrases:
           if organization in noun_phrase:
             organizations.add(noun_phrase)
-
-  for job in job_positions:
-    job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
-    regular_expression = re.compile(job_regex)
-    regex_result = re.search(regular_expression,cleaned_resume)
-    while regex_result:
-      positions.append(regex_result.start())
-      job_positions.append(job)
-      regex_result = re.search(regular_expression,cleaned_resume)
-
-  # for org in organization:
-  
-  # check if organization and job positions go together
   
   return organizations
-  # if any of this organization is beside a job position, assume it as an emplyer
 
-  # return current_employer
+
+"""
+
+Util function for fetch_employers module to get employers
+All organizations found near any job position is regarded as an employer
+Params: resume_text Type:String
+        job_positions Type: List of Strings
+        organizations Type: List of Strings
+        priority Type: Boolean True/False
+Output: current_employers Type: List of strings
+        all_employers Type: List of strings
+
+"""
+def fetch_employers_util(resume_text, job_positions, organizations, priority):
+  current_employers = []
+  employers = []
+  for job in job_positions:
+    job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
+    regular_expression = re.compile(job_regex, re.IGNORECASE)
+    temp_resume = resume_text
+    regex_result = re.search(regular_expression,temp_resume)
+    while regex_result:
+      # start to end point to a line before and after the job positions line
+      # along with the job line
+      start = regex_result.start()
+      end = regex_result.end()
+      lines_front = lines_back = 2
+      while lines_front != 0 and start != 0:
+        if temp_resume[start] == '.':
+          lines_front -= 1
+        start -= 1
+      while lines_back != 0 and end < len(temp_resume):
+        if temp_resume[end] == '.':
+          lines_back -= 1
+        end += 1
+      line = temp_resume[start:end].lower()
+
+      for org in organizations:
+        if org.lower() in line:
+          if 'present' in line:
+            if org.lower().capitalize() in employers:
+              employers.remove(org.lower().capitalize())
+            if org.lower().capitalize() not in current_employers:
+              if priority:
+                current_employers.insert(0,org.lower().capitalize())
+              else:
+                current_employers.append(org.lower().capitalize())
+          elif org.lower().capitalize() not in employers:
+            if priority:
+              current_employers.insert(0,org.lower().capitalize()) 
+            else:
+              employers.append(org.lower().capitalize()) 
+      temp_resume = temp_resume[end:]
+      regex_result = re.search(regular_expression,temp_resume)
+  return (current_employers,employers)
+
+
+"""
+
+Utility function that fetches the employers from resume
+Params: resume_text Type: String
+        job_positions Type: List of Strings
+returns: employers Type: List of string
+
+"""
+def fetch_employers(resume_text, job_positions):
+  for punctuation in string.punctuation:
+    resume_text = resume_text.replace(punctuation,'\n')
+  resume_text = '. '.join([x for x in resume_text.split('\n') 
+    if len(x.rstrip().lstrip())!=0])
+
+  current_employers = []
+  employers = []
+  organizations = fetch_all_organizations(resume_text)
+  cur_emps,emps = fetch_employers_util(resume_text, job_positions,
+    organizations,False)
+  current_employers.extend(cur_emps)
+  employers.extend(emps)
+  
+  return current_employers,employers
 
 
 """

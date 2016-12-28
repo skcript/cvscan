@@ -230,7 +230,7 @@ def fetch_jobs(cleaned_resume):
   positions = []
   for job in jobs.keys():
     job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
-    regular_expression = re.compile(job_regex)
+    regular_expression = re.compile(job_regex,re.IGNORECASE)
     regex_result = re.search(regular_expression,cleaned_resume)
     if regex_result:
       positions.append(regex_result.start())
