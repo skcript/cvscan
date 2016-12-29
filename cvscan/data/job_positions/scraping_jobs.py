@@ -20,7 +20,7 @@ if __name__ == '__main__':
   job_categories = ws.__getitem__("D")
   for title,category in zip(job_titles[1:],job_categories[1:]):
     if title.value:
-      jobs[title.value] = category.value
+      jobs[title.value.lower()] = category.value.lower()
 
   with open('positions','wb') as fp:
     pickle.dump(jobs,fp)

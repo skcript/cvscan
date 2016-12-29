@@ -7,8 +7,8 @@ Main program
 
 import converter
 import annotations_parser
-import details_parser
-import language_parser
+import details_parser as dp
+import language_parser as lp
 
 import dirpath
 import configurations
@@ -39,15 +39,16 @@ class Cvscan():
 
     def parse(self):
         self.URLs = annotations_parser.fetch_pdf_urls(self.path)
-        self.name = language_parser.fetch_name(self.raw_text)
-        self.emails = details_parser.fetch_email(self.raw_text)
-        self.phone_numbers = details_parser.fetch_phone(self.raw_text)
-        self.address = details_parser.fetch_address(self.raw_text)
-        self.experience = details_parser.calculate_experience(self.raw_text)
-        self.cleaned_resume = language_parser.clean_resume(self.raw_text)
-        self.skills = language_parser.fetch_skills(self.cleaned_resume)
-        self.job_positions, self.category = details_parser.fetch_jobs(self.cleaned_resume)
-
+        self.name = lp.fetch_name(self.raw_text)
+        self.emails = dp.fetch_email(self.raw_text)
+        self.phone_numbers = dp.fetch_phone(self.raw_text)
+        self.address = dp.fetch_address(self.raw_text)
+        self.experience = dp.calculate_experience(self.raw_text)
+        self.cleaned_resume = lp.clean_resume(self.raw_text)
+        self.skills = lp.fetch_skills(self.cleaned_resume)
+        self.job_positions, self.category = dp.fetch_jobs(self.cleaned_resume)
+        self.current_employers,self.employers = lp.fetch_employers(
+            self.raw_text,self.job_positions)
 
     # TODO: Add more fetch here
     def show(self):
@@ -60,5 +61,7 @@ class Cvscan():
             "urls" : self.URLs,
             "skills" : self.skills,
             "jobs" : self.job_positions,
-            "job category" : self.category
+            "job category" : self.category,
+            "employers" : self.employers,
+            "current_employers" : self.current_employers
         }
