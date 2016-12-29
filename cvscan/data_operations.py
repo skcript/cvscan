@@ -10,8 +10,12 @@ import logging
 import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
-
 DATAPATH = dirpath.PKGPATH + '/data/'
+
+__author__ = 'lakshmanaram'
+__license__ = 'http://opensource.org/licenses/MIT'
+__email__ = 'lakshmanaram.n@gmail.com'
+__maintainer__ = 'lakshmanaram'
 
 
 """

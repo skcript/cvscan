@@ -44,7 +44,7 @@ def clean_resume(resume_text):
   for word in resume_text:
     if word not in stopwords.words('english') and not word.isdigit():
       cleaned_resume.append(word.lower())#stemmer.stem(word))
-          
+
   cleaned_resume = ' '.join(cleaned_resume)
   return cleaned_resume
 
@@ -75,7 +75,7 @@ def fetch_skills(cleaned_resume):
 
 """
 
-Util function for fetch_employers module to get all the 
+Util function for fetch_employers module to get all the
 organization names from the resume
 Params: resume_text Type:String
 Output: Set of all organizations Type: Set of strings
@@ -105,7 +105,7 @@ def fetch_all_organizations(resume_text):
         for noun_phrase in noun_phrases:
           if organization in noun_phrase:
             organizations.add(noun_phrase.capitalize())
-  
+
   return organizations
 
 
@@ -160,7 +160,7 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
             if priority:
               employers.insert(0,org.capitalize())
             else:
-              employers.append(org.capitalize()) 
+              employers.append(org.capitalize())
       temp_resume = temp_resume[end:]
       regex_result = re.search(regular_expression,temp_resume)
   return (current_employers,employers)
@@ -177,29 +177,29 @@ returns: employers Type: List of string
 def fetch_employers(resume_text, job_positions):
   for punctuation in string.punctuation:
     resume_text = resume_text.replace(punctuation,'\n')
-  resume_text = '. '.join([x for x in resume_text.split('\n') 
+  resume_text = '. '.join([x for x in resume_text.split('\n')
     if len(x.rstrip().lstrip())!=0])
-  with open(dirpath.PKGPATH + 
+  with open(dirpath.PKGPATH +
     '/data/organizations/avoid_organizations') as fp:
     avoid_organizations = pickle.load(fp)
 
   current_employers = []
   employers = []
-  organizations = [org for org in fetch_all_organizations(resume_text) 
+  organizations = [org for org in fetch_all_organizations(resume_text)
   if org not in avoid_organizations]
   cur_emps,emps = fetch_employers_util(resume_text, job_positions,
     organizations,False)
   current_employers.extend(cur_emps)
   employers.extend(emps)
 
-  with open(dirpath.PKGPATH + 
+  with open(dirpath.PKGPATH +
     '/data/organizations/explicit_organizations') as fp:
     organizations = pickle.load(fp)
   cur_emps,emps = fetch_employers_util(resume_text, job_positions,
     organizations,True)
-  current_employers.extend([emp for emp in cur_emps 
+  current_employers.extend([emp for emp in cur_emps
     if emp not in current_employers])
-  employers.extend([emp for emp in emps 
+  employers.extend([emp for emp in emps
     if emp not in employers])
 
   return current_employers,employers
@@ -221,7 +221,7 @@ def fetch_name(resume_text):
   for sentence in tokenized_sentences:
     for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(sentence), tagset='universal')):
       if hasattr(chunk,'label'):# and chunk.label() == 'PERSON':
-        chunk = chunk[0]  
+        chunk = chunk[0]
       (name,tag) = chunk
       if tag == 'NOUN':
         return name

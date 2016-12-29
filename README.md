@@ -16,6 +16,7 @@ cvscan parse --name data/sample/a
 Data Manipulations
 ===============
 ## Skills
+Note: Skills are case-sensitive unlike Jobs and Organizations
 ### add
 ```
 cvscan add -s "C,C++,R,Java"
@@ -26,17 +27,17 @@ cvscan remove --skill "C,C++"
 ```
 ## Jobs
 ### add
-Adding
-1. contributor Job-category: Programmer
+Adding  
+1. contributor Job-category: Programmer  
 2. Android Programmer Job-category: Developer
 
 ```
 cvscan add -j "contributor:Programmer,android Programmer:Developer"
 ```
 ### remove
-Removing
-1. contributor
-2. Android Programmer
+Removing  
+1. contributor  
+2. Android Programmer  
 ```
 cvscan remove --job "contributor,Android Programmer"
 ```
