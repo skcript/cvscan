@@ -35,7 +35,7 @@ def add_organizations(orgs):
     if org.capitalize() in avoid_organizations:
       avoid_organizations.remove(org.capitalize())
       logging.debug(org+" removed from avoid_organizations")
-  
+
   with open(DATAPATH + 'organizations/explicit_organizations','wb') as fp:
     pickle.dump(organizations, fp)
   with open(DATAPATH + 'organizations/avoid_organizations','wb') as fp:
@@ -88,7 +88,7 @@ def add_skills(skills_to_add):
     if skill not in skills:
       skills.append(skill)
       logging.debug(skill + " has been added to skills")
-  
+
   with open(DATAPATH +'skills/skills','wb') as fp:
     pickle.dump(skills,fp)
   logging.debug("updated skills")
@@ -111,11 +111,11 @@ def remove_skills(skills_to_remove):
       logging.debug(skill + " has been removed from skills")
     else:
       logging.warning(skill + " not found. Check the case and Try again.")
-  
+
   with open(DATAPATH +'skills/skills','wb') as fp:
     pickle.dump(skills,fp)
   logging.debug("updated skills file")
-  
+
 
 """
 
@@ -132,9 +132,9 @@ def add_jobs(jobs_to_add):
 
   for job,category in jobs_to_add.iteritems():
     if job.lower() in jobs.keys() and category.lower() != jobs[job]:
-      jobs[job] = category
       logging.debug("Job category of "+job+" has been changed from "+
         jobs[job]+" to "+category)
+      jobs[job] = category
     elif job.lower() not in jobs.keys():
       jobs[job.lower()] = category.lower()
       logging.debug("added "+job+" - "+category)
