@@ -234,18 +234,21 @@ def fetch_jobs(cleaned_resume):
     regex_result = re.search(regular_expression,cleaned_resume)
     if regex_result:
       positions.append(regex_result.start())
-      job_positions.append(job)
+      job_positions.append(job.capitalize())
   job_positions = [job for (pos,job) in sorted(zip(positions,job_positions))]
 
   # For finding the most frequent job category
   hash_jobs = {}
   for job in job_positions:
-    if jobs[job] in hash_jobs.keys():
-      hash_jobs[jobs[job]] += 1
+    if jobs[job.lower()] in hash_jobs.keys():
+      hash_jobs[jobs[job.lower()]] += 1
     else:
-      hash_jobs[jobs[job]] = 1
+      hash_jobs[jobs[job.lower()]] = 1
   
-  # To avoid the "Other" category from becoming the most frequent one.
-  hash_jobs['Other'] = 0
+  # To avoid the "Other" category and 'Student' category from 
+  # becoming the most frequent one.
+  if 'Student' in hash_jobs.keys():
+    hash_jobs['Student'] = 0
+  hash_jobs['Other'] = -1
 
-  return (job_positions,max(hash_jobs,key=hash_jobs.get))
+  return (job_positions,max(hash_jobs,key=hash_jobs.get).capitalize())

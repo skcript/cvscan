@@ -59,7 +59,7 @@ class Cvscan():
             "phone_numbers" : self.phone_numbers,
             "emails" : self.emails,
             "urls" : self.URLs,
-            # "skills" : self.skills,
+            "skills" : self.skills,
             "jobs" : self.job_positions,
             "job category" : self.category,
             "employers" : self.employers,

@@ -34,9 +34,9 @@ def clean_resume(resume_text):
   cleaned_resume = []
 
   # replacing newlines and punctuations with space
-  resume_text =resume_text.replace('\t',' ').replace('\n',' ').replace('.',' ')
-  resume_text = resume_text.replace(',',' ').replace('/',' ').replace('(',' ')
-  resume_text = resume_text.replace(')',' ').replace('|',' ').replace('!',' ')
+  resume_text =resume_text.replace('\t',' ').replace('\n',' ')
+  for punctuation in string.punctuation:
+    resume_text = resume_text.replace(punctuation,' ')
   resume_text = resume_text.split()
 
   # removing stop words and Stemming the remaining words in the resume
@@ -104,7 +104,7 @@ def fetch_all_organizations(resume_text):
         (organization,tag) = chunk[0]
         for noun_phrase in noun_phrases:
           if organization in noun_phrase:
-            organizations.add(noun_phrase.lower().capitalize())
+            organizations.add(noun_phrase.capitalize())
   
   return organizations
 
@@ -149,18 +149,18 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
         if org.lower() in line and org.lower() not in job_positions:
           if 'present' in line:
             # print org
-            if org.lower().capitalize() in employers:
-              employers.remove(org.lower().capitalize())
-            if org.lower().capitalize() not in current_employers:
+            if org.capitalize() in employers:
+              employers.remove(org.capitalize())
+            if org.capitalize() not in current_employers:
               if priority:
-                current_employers.insert(0,org.lower().capitalize())
+                current_employers.insert(0,org.capitalize())
               else:
-                current_employers.append(org.lower().capitalize())
-          elif org.lower().capitalize() not in employers:
+                current_employers.append(org.capitalize())
+          elif org.capitalize() not in employers:
             if priority:
-              employers.insert(0,org.lower().capitalize())
+              employers.insert(0,org.capitalize())
             else:
-              employers.append(org.lower().capitalize()) 
+              employers.append(org.capitalize()) 
       temp_resume = temp_resume[end:]
       regex_result = re.search(regular_expression,temp_resume)
   return (current_employers,employers)
