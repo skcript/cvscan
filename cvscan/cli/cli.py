@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 """
+
 Cvscan command line tool
+
 """
 
 import click
@@ -19,14 +21,15 @@ def main():
     """Cvscan command line tool."""
     pass
 
+
 @main.command()
 @click.option('--name', '-n', help='Parse resume')
 def parse(name):
   """
 
-  Parse resume
-  Params: name Type: string
-  Usage: cvscan parse --name <name>
+  Parse resume\n
+  Params: name Type: string\n
+  Usage: cvscan parse --name <name>\n
   to parse file: ~/cvscan/<name>.pdf
   
   """
@@ -34,68 +37,72 @@ def parse(name):
   resume.parse()
   pprint.pprint(resume.show(), width=1)
 
+
 @main.command()
-@click.option('--org','-o',help='Explicitly add/remove an organization')
-@click.option('--skill','-s',help='Add/Remove a skill')
-@click.option('--job','-j',help='For adding a job: -j <job:category>')
+@click.option('--org','-o',help='Explicitly add organizations')
+@click.option('--skill','-s',help='Add skills')
+@click.option('--job','-j',help='For adding jobs: -j <job:category>')
 def add(org,skill,job):
   """
 
-  Add data to be considered
-  Params: 
-  org Type: string
-  skill Type: string
-  job Type: String (comma separated - job,category)
-  Usage:
-  For adding organization:
-  cvscan add --org <org_name>
-  For adding skill:
-  cvscan add --skill <skill>
-  For adding job:
-  cvscan add --job <job,category>
-  The above can be combined together also. Eg:
-  cvscan add -o <org_name> -s <skill> is also valid
+  Add data to be considered\n
+  Params: \n
+  org Type: comma separated string\n
+  skill Type: comma separated string\n
+  job Type: comma separated string (comma separated - job:category)\n
+  Usage:\n
+  For adding organization:\n
+  cvscan add --org <org_name,org_name,...>\n
+  For adding skill:\n
+  cvscan add --skill <skill,skill,...>\n
+  For adding job:\n
+  cvscan add --job <job:category,job:category,...>\n
+  The above can be combined together also. Eg:\n
+  cvscan add -o <org_name,org_name,..> -s <skill,skill,..> is also valid
 
   """
   if org:
-    do.add_organizations([org])
+    do.add_organizations(org.split(','))
   if skill:
-    do.add_skills([skill])
+    do.add_skills(skill.split(','))
   if job:
-    try:
-      job = job.split(':')
-      job = {job[0]:job[1]}
-      do.add_jobs(job)
-    except Exception:
-      print "Something wnet wrong: " + Exception
+    jobs = {}
+    for _job in job.split(','):
+      try:
+        _job = _job.split(':')
+        jobs[_job[0]] = _job[1]
+      except Exception:
+        print "Something wnet wrong: " + Exception
+    do.add_jobs(jobs)
 
 
 @main.command()
-@click.option('--org','-o',help='Explicitly add/remove an organization')
-@click.option('--skill','-s',help='Add/Remove a skill')
-@click.option('--job','-j',help='For removing a job -j <job>')
+@click.option('--org','-o',help='Explicitly remove organizations')
+@click.option('--skill','-s',help='Remove skills')
+@click.option('--job','-j',help='For removing jobs -j <job>')
 def remove(org,skill,job):
   """
 
-  Remove data from consideration
-  Params: 
-  org Type: string
-  skill Type: string
-  job Type: String
-  Usage:
-  For adding organization:
-  cvscan remove --org <org_name>
-  For adding skill:
-  cvscan remove --skill <skill>
-  For adding job:
-  cvscan remove --job <job>
-  The above can be combined together also. Eg:
-  cvscan remove -o <org_name> -s <skill> -j <job> is also valid
+  Remove data from consideration\n
+  Params:\n
+  org Type: comma separated string\n
+  skill Type: comma separated string\n  
+  job Type: comma separated string\n
+  Usage:\n   
+  For adding organization:\n
+  cvscan remove --org <org_name,org_name,..>\n
+  For adding skill:\n
+  cvscan remove --skill <skill,skill,..>\n
+  For adding job:\n
+  cvscan remove --job <job,job,..>\n
+  The above can be combined together also. Eg:\n
+  cvscan remove -o <org_name,org_name,..> -s <skill,skill,..> -j <job> 
+  is also valid
 
   """
   if org:
-    do.remove_organizations([org])
+    do.remove_organizations(org.split(','))
   if skill:
-    do.remove_skills([skill])
+    do.remove_skills(skill.split(','))
   if job:
-    do.remove_jobs([job])
+    do.remove_jobs(job.split(','))
