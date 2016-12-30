@@ -214,6 +214,7 @@ def calculate_experience(resume_text):
     logging.error('Issue calculating experience: '+str(exception_instance))
     return None
 
+
 """
 
 Utility function that fetches Job Position from the resume.
@@ -252,3 +253,27 @@ def fetch_jobs(cleaned_resume):
   hash_jobs['Other'] = -1
 
   return (job_positions,max(hash_jobs,key=hash_jobs.get).capitalize())
+
+
+"""
+
+Utility function that fetches degree from the resume.
+Params: resume_text Type: string
+returns: degree Type: List of strings
+
+"""
+def fetch_qualifications(resume_text):
+  degree_path = dirpath.PKGPATH + '/data/qualifications/degree'
+  with open(degree_path, 'rb') as fp:
+    qualifications = pickle.load(fp)
+  
+  degree = []
+  for qualification in qualifications:
+    qual_regex = r'[^a-zA-Z]'+qualification+r'[^a-zA-Z]'
+    regular_expression = re.compile(qual_regex,re.IGNORECASE)
+    regex_result = re.search(regular_expression,resume_text)
+    while regex_result:
+      degree.append(qualification)
+      resume_text = resume_text[regex_result.end():]
+      regex_result = re.search(regular_expression,resume_text)
+  return degree

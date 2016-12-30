@@ -46,6 +46,7 @@ class Cvscan():
         self.experience = dp.calculate_experience(self.raw_text)
         self.cleaned_resume = lp.clean_resume(self.raw_text)
         self.skills = lp.fetch_skills(self.cleaned_resume)
+        self.qualifications = dp.fetch_qualifications(self.raw_text)
         self.job_positions, self.category = dp.fetch_jobs(self.cleaned_resume)
         self.current_employers,self.employers = lp.fetch_employers(
             self.raw_text,self.job_positions)
@@ -63,5 +64,6 @@ class Cvscan():
             "jobs" : self.job_positions,
             "job category" : self.category,
             "employers" : self.employers,
-            "current_employers" : self.current_employers
+            "current_employers" : self.current_employers,
+            "qualifications" : self.qualifications
         }
