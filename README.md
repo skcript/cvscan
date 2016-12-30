@@ -50,3 +50,15 @@ cvscan add --org "Skcript"
 ```
 cvscan remove -o "Skcript"
 ```
+## Qualifications
+Note:  
+* Qualifications are case-sensitive.
+* Puntuations before the first and after the last alphabet should be excluded
+### add
+```
+cvscan add -q "B.S,B.Tech,B.Arch"
+```
+### remove
+```
+cvscan remove --qual "B.Arch"
+```
