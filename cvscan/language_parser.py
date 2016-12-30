@@ -12,7 +12,7 @@ import re
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 
-import dirpath
+import utilities
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -89,10 +89,7 @@ def fetch_all_organizations(resume_text):
     # np_chunks are instances of class nltk.tree.Tree
     np_chunks = parser.parse(tagged_words)
 
-  with open(dirpath.PKGPATH +
-    '/data/organizations/avoid_organizations') as fp:
-    avoid_organizations = pickle.load(fp)
-
+  avoid_organizations = utilities.get_avoid_organizations()
 
     noun_phrases = []
     for np_chunk in np_chunks:
@@ -131,23 +128,22 @@ Output: current_employers Type: List of strings
         all_employers Type: List of strings
 
 """
-def fetch_employers_util(resume_text, job_positions, organizations, priority):
+def fetch_employers_util(resume_text, job_positions, organizations):
   current_employers = []
   employers = []
   for job in job_positions:
-    # TODO: remove priority
-    # TODO: move regex to config
     job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
     regular_expression = re.compile(job_regex, re.IGNORECASE)
     temp_resume = resume_text
     regex_result = re.search(regular_expression, temp_resume)
     while regex_result:
+      
       # start to end point to a line before and after the job positions line
       # along with the job line
       start = regex_result.start()
       end = regex_result.end()
-      # TODO put 3 in config
-      lines_front = lines_back = 3
+      lines_front = utilities.LINES_FRONT
+      lines_back = utilities.LINES_BACK
       while lines_front != 0 and start != 0:
         if temp_resume[start] == '.':
           lines_front -= 1
@@ -163,19 +159,12 @@ def fetch_employers_util(resume_text, job_positions, organizations, priority):
       for org in organizations:
         if org.lower() in line and org.lower() not in job_positions:
           if 'present' in line:
-            # print org
             if org.capitalize() in employers:
               employers.remove(org.capitalize())
             if org.capitalize() not in current_employers:
-              if priority:
-                current_employers.insert(0, org.capitalize())
-              else:
-                current_employers.append(org.capitalize())
+              current_employers.append(org.capitalize())
           elif org.capitalize() not in employers:
-            if priority:
-              employers.insert(0, org.capitalize())
-            else:
-              employers.append(org.capitalize())
+            employers.append(org.capitalize())
 
       temp_resume = temp_resume[end:]
       regex_result = re.search(regular_expression, temp_resume)
@@ -212,19 +201,15 @@ def fetch_employers(resume_text, job_positions):
 
   current_employers = []
   employers = []
-  organizations = fetch_all_organizations(resume_text)
 
   cur_emps, emps = fetch_employers_util(resume_text, job_positions, 
-    organizations, False)
+    utilities.get_organizations())
+
   current_employers.extend(cur_emps)
   employers.extend(emps)
 
-  with open(dirpath.PKGPATH +
-    '/data/organizations/explicit_organizations') as fp:
-    organizations = pickle.load(fp)
-
   cur_emps, emps = fetch_employers_util(resume_text, job_positions, 
-    organizations, True)
+    fetch_all_organizations(resume_text))
   
   current_employers.extend([emp for emp in cur_emps
     if emp not in current_employers])
