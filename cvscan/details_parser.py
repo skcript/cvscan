@@ -268,6 +268,7 @@ def fetch_qualifications(resume_text):
     qualifications = pickle.load(fp)
   
   degree = []
+  info = []
   for qualification in qualifications:
     qual_regex = r'[^a-zA-Z]'+qualification+r'[^a-zA-Z]'
     regular_expression = re.compile(qual_regex,re.IGNORECASE)
@@ -275,5 +276,9 @@ def fetch_qualifications(resume_text):
     while regex_result:
       degree.append(qualification)
       resume_text = resume_text[regex_result.end():]
+      lines = [line.rstrip().lstrip() 
+      for line in resume_text.split('\n') if line.rstrip().lstrip()]
+      if lines:
+        info.append(lines[0])
       regex_result = re.search(regular_expression,resume_text)
-  return degree
+  return degree,info
