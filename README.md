@@ -1,4 +1,4 @@
-# cvscan
+<!-- # cvscan
 Your not so typical resume parser
 Instructions
 ========
@@ -62,3 +62,52 @@ cvscan add -q "B.S,B.Tech,B.Arch"
 ```
 cvscan remove --qual "B.Arch"
 ```
+## Extra Information
+### add
+```
+cvscan add -e "machine learning,artificial intelligence"
+```
+### remove
+```
+cvscan remove --extra "machine learning,artificial intelligence"
+```
+File Descriptions
+============
+## class Cvscan
+```
+cvscan = Cvscan(name,path)
+```
+#### Extract
+Convert the input file to raw_text and calls parse class method
+```
+cvscan.extract()
+```
+#### Display extracted text
+```
+cvscan.show()
+```
+-->
+### Attributes
+| Attributes          | Functions |
+|---------------------|-----------|
+|path                 | Stores the path of the resume |
+|raw_text             | Stores the resume as raw text |
+|URLs                 | Stores all the URLs from the resume |
+|name                 | Applicant's name |
+|emails               | Applicant's email |
+|Phone number         | Applicant's contact number |
+|address              | Applicant's address |
+|experience           | Applicant's experience in years |
+|cleaned_resume       | raw_text after removing english stopwords |
+|skills               | Applicant's skillset |
+|qualifications       | Applicant's qualifications |
+|degree_info          | info about qualification |
+| 
+
+## configurations.py
+Contains the regular expressions used throughout the project
+## converter.py
+Contains methods to convert resume from input format to raw text
+#### pdf_to_text
+Uses pdfminer library to fetch raw text from the resume. Special characters and bullets in the resume are replaced with a newline character.  
+This formatted text from the resume is returned.

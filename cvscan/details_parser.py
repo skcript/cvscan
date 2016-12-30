@@ -29,7 +29,7 @@ returns: list of emails
 """
 def fetch_email(resume_text):
   try:
-    regular_expression = re.compile(regex.email,re.IGNORECASE)
+    regular_expression = re.compile(regex.email, re.IGNORECASE)
     emails = []
     result = re.search(regular_expression, resume_text)
     while result:
@@ -51,7 +51,7 @@ returns: phone number type:string
 """
 def fetch_phone(resume_text):
   try:
-    regular_expression = re.compile(regex.get_phone(3,3,10),re.IGNORECASE)
+    regular_expression = re.compile(regex.get_phone(3, 3, 10), re.IGNORECASE)
     result = re.search(regular_expression, resume_text)
     phone = ''
     if result:
@@ -60,9 +60,9 @@ def fetch_phone(resume_text):
         if part:
           phone += part
     if phone is '':
-      for i in range(1,10):
-        for j in range(1,10-i):
-          regular_expression =re.compile(regex.get_phone(i,j,10),re.IGNORECASE)
+      for i in range(1, 10):
+        for j in range(1, 10-i):
+          regular_expression =re.compile(regex.get_phone(i, j, 10), re.IGNORECASE)
           result = re.search(regular_expression, resume_text)
           if result:
             result = result.groups()
@@ -82,7 +82,7 @@ def fetch_phone(resume_text):
 
 Utility function that fetches address in the resume.
 Params: resume_text type: string
-returns: address type:dictionary keys:district,state,pincode
+returns: address type:dictionary keys:district, state, pincode
 
 """
 def fetch_address(resume_text):
@@ -99,11 +99,11 @@ def fetch_address(resume_text):
 
   with open(pincode_input_path, 'rb') as fp:
     pincodes = pickle.load(fp)
-  with open(address_input_path,'rb') as fp:
+  with open(address_input_path, 'rb') as fp:
     address = pickle.load(fp)
 
   regular_expression = re.compile(regex.pincode)
-  regex_result = re.search(regular_expression,resume_text)
+  regex_result = re.search(regular_expression, resume_text)
   while regex_result:
     useful_resume_text = resume_text[:regex_result.start()].lower()
     pincode_tuple = regex_result.group()
@@ -119,17 +119,17 @@ def fetch_address(resume_text):
 
     result_address.clear()
     resume_text = resume_text[regex_result.end():]
-    regex_result = re.search(regular_expression,resume_text)
+    regex_result = re.search(regular_expression, resume_text)
 
   resume_text = initial_resume_text.lower()
 
-  with open(states_input,'rb') as fp:
+  with open(states_input, 'rb') as fp:
     states = pickle.load(fp)
-  with open(district_state_input,'rb') as fp:
+  with open(district_state_input, 'rb') as fp:
     district_states = pickle.load(fp)
 
   # Check if the input is a separate word in resume_text
-  def if_separate_word(pos,word):
+  def if_separate_word(pos, word):
     if (pos != 0) and resume_text[pos-1].isalpha():
       return False
     final_pos = pos+len(word)
@@ -143,12 +143,12 @@ def fetch_address(resume_text):
   district_pos = len(resume_text)
   for state in states:
     pos = resume_text.find(state)
-    if (pos != -1) and(pos < state_pos) and if_separate_word(pos,state):
+    if (pos != -1) and(pos < state_pos) and if_separate_word(pos, state):
       state_pos = pos
       result_state = state
   for district in district_states.keys():
     pos = resume_text.find(district)
-    if (pos != -1) and (pos < district_pos) and if_separate_word(pos,district):
+    if (pos != -1) and (pos < district_pos) and if_separate_word(pos, district):
       district_pos = pos
       result_district = district
   if (result_state is '') and (result_district is not ''):
@@ -170,7 +170,7 @@ returns: experience type:int
 def calculate_experience(resume_text):
   #
   def get_month_index(month):
-    month_dict = {'jan':1,'feb':2,'mar':3,'apr':4,'may':5,'jun':6,'jul':7,'aug':8,'sep':9,'oct':10,'nov':11,'dec':12}
+    month_dict = {'jan':1, 'feb':2, 'mar':3, 'apr':4, 'may':5, 'jun':6, 'jul':7, 'aug':8, 'sep':9, 'oct':10, 'nov':11, 'dec':12}
     return month_dict[month.lower()]
 
   try:
@@ -179,16 +179,16 @@ def calculate_experience(resume_text):
     start_year = -1
     end_month = -1
     end_year = -1
-    regular_expression = re.compile(regex.date_range,re.IGNORECASE)
+    regular_expression = re.compile(regex.date_range, re.IGNORECASE)
     regex_result = re.search(regular_expression, resume_text)
     while regex_result:
       date_range = regex_result.group()
       year_regex = re.compile(regex.year)
-      year_result = re.search(year_regex,date_range)
+      year_result = re.search(year_regex, date_range)
       if (start_year == -1) or (int(year_result.group()) <= start_year):
         start_year = int(year_result.group())
-        month_regex = re.compile(regex.months_short,re.IGNORECASE)
-        month_result = re.search(month_regex,date_range)
+        month_regex = re.compile(regex.months_short, re.IGNORECASE)
+        month_result = re.search(month_regex, date_range)
         if month_result:
           current_month = get_month_index(month_result.group())
           if (start_month == -1) or (current_month < start_month):
@@ -197,11 +197,11 @@ def calculate_experience(resume_text):
         end_month = date.today().month # current month
         end_year = date.today().year # current year
       else:
-        year_result = re.search(year_regex,date_range[year_result.end():])
+        year_result = re.search(year_regex, date_range[year_result.end():])
         if (end_year == -1) or (int(year_result.group()) >= end_year):
           end_year = int(year_result.group())
-          month_regex = re.compile(regex.months_short,re.IGNORECASE)
-          month_result = re.search(month_regex,date_range)
+          month_regex = re.compile(regex.months_short, re.IGNORECASE)
+          month_result = re.search(month_regex, date_range)
           if month_result:
             current_month = get_month_index(month_result.group())
             if (end_month == -1) or (current_month > end_month):
@@ -231,12 +231,12 @@ def fetch_jobs(cleaned_resume):
   positions = []
   for job in jobs.keys():
     job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
-    regular_expression = re.compile(job_regex,re.IGNORECASE)
-    regex_result = re.search(regular_expression,cleaned_resume)
+    regular_expression = re.compile(job_regex, re.IGNORECASE)
+    regex_result = re.search(regular_expression, cleaned_resume)
     if regex_result:
       positions.append(regex_result.start())
       job_positions.append(job.capitalize())
-  job_positions = [job for (pos,job) in sorted(zip(positions,job_positions))]
+  job_positions = [job for (pos, job) in sorted(zip(positions, job_positions))]
 
   # For finding the most frequent job category
   hash_jobs = {}
@@ -252,7 +252,7 @@ def fetch_jobs(cleaned_resume):
     hash_jobs['Student'] = 0
   hash_jobs['Other'] = -1
 
-  return (job_positions,max(hash_jobs,key=hash_jobs.get).capitalize())
+  return (job_positions, max(hash_jobs, key=hash_jobs.get).capitalize())
 
 
 """
@@ -263,7 +263,7 @@ returns: skill_set Type: List
 
 """
 def fetch_skills(cleaned_resume):
-  with open(dirpath.PKGPATH + '/data/skills/skills','rb') as fp:
+  with open(dirpath.PKGPATH + '/data/skills/skills', 'rb') as fp:
     skills = pickle.load(fp)
 
   skill_set = []
@@ -292,8 +292,8 @@ def fetch_qualifications(resume_text):
   info = []
   for qualification in qualifications:
     qual_regex = r'[^a-zA-Z]'+qualification+r'[^a-zA-Z]'
-    regular_expression = re.compile(qual_regex,re.IGNORECASE)
-    regex_result = re.search(regular_expression,resume_text)
+    regular_expression = re.compile(qual_regex, re.IGNORECASE)
+    regex_result = re.search(regular_expression, resume_text)
     while regex_result:
       degree.append(qualification)
       resume_text = resume_text[regex_result.end():]
@@ -301,8 +301,8 @@ def fetch_qualifications(resume_text):
       for line in resume_text.split('\n') if line.rstrip().lstrip()]
       if lines:
         info.append(lines[0])
-      regex_result = re.search(regular_expression,resume_text)
-  return degree,info
+      regex_result = re.search(regular_expression, resume_text)
+  return degree, info
 
 
 """
@@ -319,10 +319,10 @@ def fetch_extra(resume_text):
   extra_information = []
   for info in extra:
     extra_regex = r'[^a-zA-Z]'+info+r'[^a-zA-Z]'
-    regular_expression = re.compile(extra_regex,re.IGNORECASE)
-    regex_result = re.search(regular_expression,resume_text)
+    regular_expression = re.compile(extra_regex, re.IGNORECASE)
+    regex_result = re.search(regular_expression, resume_text)
     while regex_result:
       extra_information.append(info)
       resume_text = resume_text[regex_result.end():]
-      regex_result = re.search(regular_expression,resume_text)
+      regex_result = re.search(regular_expression, resume_text)
   return extra_information

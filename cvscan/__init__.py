@@ -35,7 +35,7 @@ class Cvscan():
         if self.raw_text is not '':
             self.parse()
         else:
-            raise ValueError("Error parsing resume.")
+            raise ValueError("Error extracting resume text.")
 
     def parse(self):
         self.URLs = annotations_parser.fetch_pdf_urls(self.path)
