@@ -80,6 +80,8 @@ def fetch_all_organizations(resume_text):
   grammar = r"""NP: {<NN|NNP>+}"""
   parser = nltk.RegexpParser(grammar)
 
+  avoid_organizations = utilities.get_avoid_organizations()
+
   for sentence in tokenized_sentences:
 
     # tags all parts of speech in the tokenized sentences 
@@ -88,10 +90,8 @@ def fetch_all_organizations(resume_text):
     # then chunks with customize grammar
     # np_chunks are instances of class nltk.tree.Tree
     np_chunks = parser.parse(tagged_words)
-
-  avoid_organizations = utilities.get_avoid_organizations()
-
     noun_phrases = []
+
     for np_chunk in np_chunks:
       if isinstance(np_chunk, nltk.tree.Tree) and np_chunk.label() == 'NP':
         # if np_chunk is of grammer 'NP' then create a space seperated string of all leaves under the 'NP' tree
@@ -99,7 +99,7 @@ def fetch_all_organizations(resume_text):
         for (org, tag) in np_chunk.leaves():
           noun_phrase += org + ' '
 
-        noun_phrases.append(noun_phrase.rsplit())
+        noun_phrases.append(noun_phrase.rstrip())
 
     # Using name entity chunker to get all the organizations
     chunks = nltk.ne_chunk(tagged_words)
@@ -137,7 +137,7 @@ def fetch_employers_util(resume_text, job_positions, organizations):
     temp_resume = resume_text
     regex_result = re.search(regular_expression, temp_resume)
     while regex_result:
-      
+
       # start to end point to a line before and after the job positions line
       # along with the job line
       start = regex_result.start()
