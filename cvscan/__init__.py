@@ -45,12 +45,13 @@ class Cvscan():
         self.address = dp.fetch_address(self.raw_text)
         self.experience = dp.calculate_experience(self.raw_text)
         self.cleaned_resume = lp.clean_resume(self.raw_text)
-        self.skills = lp.fetch_skills(self.cleaned_resume)
+        self.skills = dp.fetch_skills(self.cleaned_resume)
         (self.qualifications,self.degree_info) = dp.fetch_qualifications(
             self.raw_text)
         self.job_positions, self.category = dp.fetch_jobs(self.cleaned_resume)
         self.current_employers,self.employers = lp.fetch_employers(
             self.raw_text,self.job_positions)
+        self.extra_info = dp.fetch_extra(self.raw_text)
 
     # TODO: Add more fetch here
     def show(self):
@@ -67,5 +68,6 @@ class Cvscan():
             "employers" : self.employers,
             "current_employers" : self.current_employers,
             "qualifications" : self.qualifications,
-            "qualifications_info" : self.degree_info
+            "qualifications_info" : self.degree_info,
+            "extra_info" : self.extra_info
         }

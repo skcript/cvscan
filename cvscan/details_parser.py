@@ -257,9 +257,30 @@ def fetch_jobs(cleaned_resume):
 
 """
 
-Utility function that fetches degree from the resume.
+Utility function that fetches the skills from resume
+Params: cleaned_resume Type: string
+returns: skill_set Type: List
+
+"""
+def fetch_skills(cleaned_resume):
+  with open(dirpath.PKGPATH + '/data/skills/skills','rb') as fp:
+    skills = pickle.load(fp)
+
+  skill_set = []
+  for skill in skills:
+    skill = ' '+skill+' '
+    if skill.lower() in cleaned_resume:
+      skill_set.append(skill)
+  return skill_set
+
+
+"""
+
+Utility function that fetches degree and degree-info from the resume.
 Params: resume_text Type: string
-returns: degree Type: List of strings
+returns: 
+degree Type: List of strings
+info Type: List of strings
 
 """
 def fetch_qualifications(resume_text):
@@ -282,3 +303,26 @@ def fetch_qualifications(resume_text):
         info.append(lines[0])
       regex_result = re.search(regular_expression,resume_text)
   return degree,info
+
+
+"""
+
+Utility function that fetches extra information from the resume.
+Params: resume_text Type: string
+returns: extra_information Type: List of strings
+
+"""
+def fetch_extra(resume_text):
+  with open(dirpath.PKGPATH + '/data/extra/extra', 'rb') as fp:
+    extra = pickle.load(fp)
+  
+  extra_information = []
+  for info in extra:
+    extra_regex = r'[^a-zA-Z]'+info+r'[^a-zA-Z]'
+    regular_expression = re.compile(extra_regex,re.IGNORECASE)
+    regex_result = re.search(regular_expression,resume_text)
+    while regex_result:
+      extra_information.append(info)
+      resume_text = resume_text[regex_result.end():]
+      regex_result = re.search(regular_expression,resume_text)
+  return extra_information

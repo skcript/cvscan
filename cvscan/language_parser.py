@@ -50,30 +50,6 @@ def clean_resume(resume_text):
 
 
 """
-TODO: move this function to the details parser as stem isn't used
-
-Utility function that fetches the skills from resume
-Params: cleaned_resume Type: string
-returns: skill_set Type: List
-
-"""
-def fetch_skills(cleaned_resume):
-  with open(dirpath.PKGPATH + '/data/skills/skills','rb') as fp:
-    skills = pickle.load(fp)
-
-  skill_set = []
-  for skill in skills:
-    # stem_skill = skill.split()
-    # for word in skill:
-    #   stem_skill.append(stemmer.stem(word))
-    # stem_skill = ' '.join(stem_skill)
-    skill = ' '+skill+' '
-    if skill.lower() in cleaned_resume:
-      skill_set.append(skill)
-  return skill_set
-
-
-"""
 
 Util function for fetch_employers module to get all the
 organization names from the resume
