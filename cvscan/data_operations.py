@@ -217,3 +217,47 @@ def remove_qualifications(quals):
   with open(DATAPATH + 'qualifications/degree','wb') as fp:
     pickle.dump(qualifications, fp)
   logging.debug("degree file written")
+
+
+"""
+
+An Utility function to add extra information to the extra file.
+Params: extra_info Type: List of String
+extra_info are case-sensitive.
+
+"""
+def add_extra(extra_info):
+  with open(DATAPATH + 'extra/extra','rb') as fp:
+    extra = pickle.load(fp)
+  logging.debug("extra file loaded")
+
+  for e in extra_info:
+    if e not in extra:
+      extra.append(e)
+      logging.debug(e + " added to extra information")
+
+  with open(DATAPATH + 'extra/extra','wb') as fp:
+    pickle.dump(extra, fp)
+  logging.debug("extra file written")
+
+
+"""
+
+An Utility function to remove extra information from the extra file.
+Params: extra_info Type: List of String
+Extra informations are case-sensitive.
+
+"""
+def remove_extra(extra_info):
+  with open(DATAPATH + 'extra/extra','rb') as fp:
+    extra = pickle.load(fp)
+  logging.debug("extra file loaded")
+
+  for e in extra_info:
+    if e in extra:
+      extra.remove(e)
+      logging.debug(e + " removed from extra information")
+
+  with open(DATAPATH + 'extra/extra','wb') as fp:
+    pickle.dump(extra, fp)
+  logging.debug("extra file written")

@@ -43,7 +43,8 @@ def parse(name):
 @click.option('--skill','-s',help='Add skills')
 @click.option('--job','-j',help='For adding jobs: -j <job:category>')
 @click.option('--qual','-q',help="Add qualifications")
-def add(org,skill,job,qual):
+@click.option('--extra','-e',help = "Add Extra information")
+def add(org,skill,job,qual,extra):
   """
 
   Add data to be considered\n
@@ -62,6 +63,8 @@ def add(org,skill,job,qual):
   For adding qualification:\n
   cvscan add --qual <degree,degree,..>\n
   punctuations before the first and after the last alphabet are excluded\n
+  For adding extra information:\n
+  cvscan add --extra <extra,extra>\n
   The above can be combined together also. Eg:\n
   cvscan add -o <org_name,org_name,..> -s <skill,skill,..> is also valid
 
@@ -81,14 +84,16 @@ def add(org,skill,job,qual):
     do.add_jobs(jobs)
   if qual:
     do.add_qualifications(qual.split(','))
-
+  if extra:
+    do.add_extra(extra.split(','))
 
 @main.command()
 @click.option('--org','-o',help='Explicitly remove organizations')
 @click.option('--skill','-s',help='Remove skills')
 @click.option('--job','-j',help='For removing jobs -j <job>')
 @click.option('--qual','-q',help="Remove qualifications")
-def remove(org,skill,job,qual):
+@click.option('--extra','-e',help = "Remove Extra information")
+def remove(org,skill,job,qual,extra):
   """
 
   Remove data from consideration\n
@@ -107,6 +112,8 @@ def remove(org,skill,job,qual):
   For removing qualification:\n
   cvscan remove -q <degree,degree,..>\n
   punctuations before the first and after the last alphabet are excluded\n
+  For removing extra information:\n
+  cvscan remove -e <extra,extra>\n
   The above can be combined together also. Eg:\n
   cvscan remove -o <org_name,org_name,..> -s <skill,skill,..> -j <job>
   is also valid
@@ -120,3 +127,5 @@ def remove(org,skill,job,qual):
     do.remove_jobs(job.split(','))
   if qual:
     do.remove_qualifications(qual.split(','))
+  if extra:
+    do.remove_extra(extra.split(','))
