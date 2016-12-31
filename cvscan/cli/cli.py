@@ -42,7 +42,9 @@ def parse(name):
 @click.option('--org','-o',help='Explicitly add organizations')
 @click.option('--skill','-s',help='Add skills')
 @click.option('--job','-j',help='For adding jobs: -j <job:category>')
-def add(org,skill,job):
+@click.option('--qual','-q',help="Add qualifications")
+@click.option('--extra','-e',help = "Add Extra information")
+def add(org,skill,job,qual,extra):
   """
 
   Add data to be considered\n
@@ -50,6 +52,7 @@ def add(org,skill,job):
   org Type: comma separated string\n
   skill Type: comma separated string\n
   job Type: comma separated string (comma separated - job:category)\n
+  qual Type: comma separated string\n
   Usage:\n
   For adding organization:\n
   cvscan add --org <org_name,org_name,...>\n
@@ -57,6 +60,11 @@ def add(org,skill,job):
   cvscan add --skill <skill,skill,...>\n
   For adding job:\n
   cvscan add --job <job:category,job:category,...>\n
+  For adding qualification:\n
+  cvscan add --qual <degree,degree,..>\n
+  punctuations before the first and after the last alphabet are excluded\n
+  For adding extra information:\n
+  cvscan add --extra <extra,extra>\n
   The above can be combined together also. Eg:\n
   cvscan add -o <org_name,org_name,..> -s <skill,skill,..> is also valid
 
@@ -74,13 +82,18 @@ def add(org,skill,job):
       except Exception:
         print "Something wnet wrong: " + Exception
     do.add_jobs(jobs)
-
+  if qual:
+    do.add_qualifications(qual.split(','))
+  if extra:
+    do.add_extra(extra.split(','))
 
 @main.command()
 @click.option('--org','-o',help='Explicitly remove organizations')
 @click.option('--skill','-s',help='Remove skills')
 @click.option('--job','-j',help='For removing jobs -j <job>')
-def remove(org,skill,job):
+@click.option('--qual','-q',help="Remove qualifications")
+@click.option('--extra','-e',help = "Remove Extra information")
+def remove(org,skill,job,qual,extra):
   """
 
   Remove data from consideration\n
@@ -88,15 +101,21 @@ def remove(org,skill,job):
   org Type: comma separated string\n
   skill Type: comma separated string\n  
   job Type: comma separated string\n
+  qual Type: comma separated string\n
   Usage:\n   
-  For adding organization:\n
+  For removing organization:\n
   cvscan remove --org <org_name,org_name,..>\n
-  For adding skill:\n
+  For removing skill:\n
   cvscan remove --skill <skill,skill,..>\n
-  For adding job:\n
+  For removing job:\n
   cvscan remove --job <job,job,..>\n
+  For removing qualification:\n
+  cvscan remove -q <degree,degree,..>\n
+  punctuations before the first and after the last alphabet are excluded\n
+  For removing extra information:\n
+  cvscan remove -e <extra,extra>\n
   The above can be combined together also. Eg:\n
-  cvscan remove -o <org_name,org_name,..> -s <skill,skill,..> -j <job> 
+  cvscan remove -o <org_name,org_name,..> -s <skill,skill,..> -j <job>
   is also valid
 
   """
@@ -106,3 +125,7 @@ def remove(org,skill,job):
     do.remove_skills(skill.split(','))
   if job:
     do.remove_jobs(job.split(','))
+  if qual:
+    do.remove_qualifications(qual.split(','))
+  if extra:
+    do.remove_extra(extra.split(','))
