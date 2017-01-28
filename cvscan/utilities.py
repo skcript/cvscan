@@ -6,21 +6,13 @@ Contains all the constants and utility functions used through out the project
 """
 
 import pickle
-
 import dirpath
 
-__author__ = 'lakshmanaram'
-__license__ = 'http://opensource.org/licenses/MIT'
-__email__ = 'lakshmanaram.n@gmail.com'
-__maintainer__ = 'lakshmanaram'
-
 # Constants
-
 LINES_FRONT = 3
 LINES_BACK = 3
 
 # Methods
-
 def get_avoid_organizations():
   with open(dirpath.PKGPATH +
     '/data/organizations/avoid_organizations') as fp:
