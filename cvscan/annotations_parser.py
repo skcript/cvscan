@@ -12,12 +12,6 @@ from pdfminer.pdfpage import PDFPage
 
 logging.basicConfig(level=logging.DEBUG)
 
-__author__ = 'lakshmanaram'
-__license__ = 'http://opensource.org/licenses/MIT'
-__email__ = 'lakshmanaram.n@gmail.com'
-__maintainer__ = 'lakshmanaram'
-
-
 """
 
 Utility Function to fetch URLs from pdf.

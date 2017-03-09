@@ -16,12 +16,6 @@ import utilities
 
 logging.basicConfig(level=logging.DEBUG)
 
-__author__ = 'lakshmanaram'
-__license__ = 'http://opensource.org/licenses/MIT'
-__email__ = 'lakshmanaram.n@gmail.com'
-__maintainer__ = 'lakshmanaram'
-
-
 """
 
 Utility function that cleans the resume_text.
@@ -67,7 +61,7 @@ def fetch_all_organizations(resume_text):
   # NNP - Proper Noun
   # V - Verb
   # JJ - Adjective
-  
+
   # In a sentence that contains NN NNNP V NN NN JJ NN.
   # The noun-phrases fetched are:
   # NP: NN NNP
@@ -84,7 +78,7 @@ def fetch_all_organizations(resume_text):
 
   for sentence in tokenized_sentences:
 
-    # tags all parts of speech in the tokenized sentences 
+    # tags all parts of speech in the tokenized sentences
     tagged_words = nltk.pos_tag(nltk.word_tokenize(sentence))
 
     # then chunks with customize grammar
@@ -155,7 +149,7 @@ def fetch_employers_util(resume_text, job_positions, organizations):
 
       # Read from temp_resume with start and end as positions
       line = temp_resume[start:end].lower()
-      
+
       for org in organizations:
         if org.lower() in line and org.lower() not in job_positions:
           if 'present' in line:
@@ -189,7 +183,7 @@ def fetch_employers(resume_text, job_positions):
 
   for punctuation in string.punctuation:
     resume_text = resume_text.replace(punctuation, '\n')
-  
+
   temp_resume = []
   for x in resume_text.split('\n'):
     # append only if there is text
@@ -202,15 +196,15 @@ def fetch_employers(resume_text, job_positions):
   current_employers = []
   employers = []
 
-  cur_emps, emps = fetch_employers_util(resume_text, job_positions, 
+  cur_emps, emps = fetch_employers_util(resume_text, job_positions,
     utilities.get_organizations())
 
   current_employers.extend(cur_emps)
   employers.extend(emps)
 
-  cur_emps, emps = fetch_employers_util(resume_text, job_positions, 
+  cur_emps, emps = fetch_employers_util(resume_text, job_positions,
     fetch_all_organizations(resume_text))
-  
+
   current_employers.extend([emp for emp in cur_emps
     if emp not in current_employers])
   employers.extend([emp for emp in emps

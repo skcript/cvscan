@@ -14,12 +14,6 @@ import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 
-__author__ = 'lakshmanaram'
-__license__ = 'http://opensource.org/licenses/MIT'
-__email__ = 'lakshmanaram.n@gmail.com'
-__maintainer__ = 'lakshmanaram'
-
-
 """
 
 Utility function that fetches emails in the resume.
@@ -208,7 +202,7 @@ def calculate_experience(resume_text):
               end_month = current_month
       resume_text = resume_text[regex_result.end():]
       regex_result = re.search(regular_expression, resume_text)
-    
+
     return end_year - start_year  # Use the obtained month attribute
   except Exception, exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
@@ -226,7 +220,7 @@ def fetch_jobs(cleaned_resume):
   positions_path = dirpath.PKGPATH + '/data/job_positions/positions'
   with open(positions_path, 'rb') as fp:
     jobs = pickle.load(fp)
-  
+
   job_positions = []
   positions = []
   for job in jobs.keys():
@@ -245,8 +239,8 @@ def fetch_jobs(cleaned_resume):
       hash_jobs[jobs[job.lower()]] += 1
     else:
       hash_jobs[jobs[job.lower()]] = 1
-  
-  # To avoid the "Other" category and 'Student' category from 
+
+  # To avoid the "Other" category and 'Student' category from
   # becoming the most frequent one.
   if 'Student' in hash_jobs.keys():
     hash_jobs['Student'] = 0
@@ -278,7 +272,7 @@ def fetch_skills(cleaned_resume):
 
 Utility function that fetches degree and degree-info from the resume.
 Params: resume_text Type: string
-returns: 
+returns:
 degree Type: List of strings
 info Type: List of strings
 
@@ -287,7 +281,7 @@ def fetch_qualifications(resume_text):
   degree_path = dirpath.PKGPATH + '/data/qualifications/degree'
   with open(degree_path, 'rb') as fp:
     qualifications = pickle.load(fp)
-  
+
   degree = []
   info = []
   for qualification in qualifications:
@@ -297,7 +291,7 @@ def fetch_qualifications(resume_text):
     while regex_result:
       degree.append(qualification)
       resume_text = resume_text[regex_result.end():]
-      lines = [line.rstrip().lstrip() 
+      lines = [line.rstrip().lstrip()
       for line in resume_text.split('\n') if line.rstrip().lstrip()]
       if lines:
         info.append(lines[0])
@@ -315,7 +309,7 @@ returns: extra_information Type: List of strings
 def fetch_extra(resume_text):
   with open(dirpath.PKGPATH + '/data/extra/extra', 'rb') as fp:
     extra = pickle.load(fp)
-  
+
   extra_information = []
   for info in extra:
     extra_regex = r'[^a-zA-Z]'+info+r'[^a-zA-Z]'
