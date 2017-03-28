@@ -80,10 +80,10 @@ returns: address type:dictionary keys:district, state, pincode
 
 """
 def fetch_address(resume_text):
-  pincode_input_path = dirpath.DATAPATH
-  address_input_path = dirpath.DATAPATH
-  states_input = dirpath.DATAPATH
-  district_state_input = dirpath.DATAPATH
+  pincode_input_path = dirpath.DATAPATH + '/address/pincodes'
+  address_input_path = dirpath.DATAPATH+ '/address/pincode-district-state'
+  states_input = dirpath.DATAPATH + '/address/states'
+  district_state_input = dirpath.DATAPATH + '/address/district-states'
   pincodes = set()
   states = set()
   district_states = {}
@@ -217,7 +217,7 @@ returns: job_positions Type:List
 
 """
 def fetch_jobs(cleaned_resume):
-  positions_path = dirpath.DATAPATH
+  positions_path = dirpath.DATAPATH + '/job_positions/positions'
   with open(positions_path, 'rb') as fp:
     jobs = pickle.load(fp)
 
@@ -257,7 +257,7 @@ returns: skill_set Type: List
 
 """
 def fetch_skills(cleaned_resume):
-  with open(dirpath.DATAPATH, 'rb') as fp:
+  with open(dirpath.DATAPATH+ '/skills/skills', 'rb') as fp:
     skills = pickle.load(fp)
 
   skill_set = []
@@ -278,7 +278,7 @@ info Type: List of strings
 
 """
 def fetch_qualifications(resume_text):
-  degree_path = dirpath.DATAPATH
+  degree_path = dirpath.DATAPATH + '/qualifications/degree'
   with open(degree_path, 'rb') as fp:
     qualifications = pickle.load(fp)
 
@@ -307,7 +307,7 @@ returns: extra_information Type: List of strings
 
 """
 def fetch_extra(resume_text):
-  with open(dirpath.DATAPATH, 'rb') as fp:
+  with open(dirpath.DATAPATH+ '/extra/extra', 'rb') as fp:
     extra = pickle.load(fp)
 
   extra_information = []

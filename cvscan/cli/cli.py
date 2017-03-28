@@ -7,6 +7,7 @@ Cvscan command line tool
 
 import click
 import pprint
+import os
 
 from cvscan import Cvscan
 from cvscan import data_operations as do
@@ -24,7 +25,8 @@ def main():
 
 @main.command()
 @click.option('--name', '-n', help='Parse resume')
-def parse(name):
+@click.option('--path', '-n', help='Parse resume', default=None)
+def parse(name, path):
   """
 
   Parse resume\n
@@ -33,9 +35,16 @@ def parse(name):
   to parse file: ~/cvscan/<name>.pdf
   
   """
-  resume = Cvscan(name)
-  resume.parse()
-  pprint.pprint(resume.show(), width=1)
+
+  if name is None:
+    dirpath = os.path.dirname(path)
+    basename = os.path.basename(path)
+    resume = Cvscan(basename, path=dirpath)
+    pprint.pprint(resume.show(), width=1)
+  else:
+    resume = Cvscan(name)
+    resume.parse()
+    pprint.pprint(resume.show(), width=1)
 
 
 @main.command()
