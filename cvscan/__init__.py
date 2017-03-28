@@ -9,7 +9,7 @@ import converter
 import annotations_parser
 import details_parser as dp
 import language_parser as lp
-
+import json
 import dirpath
 import configurations
 
@@ -55,7 +55,24 @@ class Cvscan():
 
     # TODO: Add more fetch here
     def show(self):
-        return {
+        # return {
+        #     "name" : self.name,
+        #     "experience" : self.experience,
+        #     "address" : self.address,
+        #     "phone_numbers" : self.phone_numbers,
+        #     "emails" : self.emails,
+        #     "urls" : self.URLs,
+        #     "skills" : self.skills,
+        #     "jobs" : self.job_positions,
+        #     "job category" : self.category,
+        #     "employers" : self.employers,
+        #     "current_employers" : self.current_employers,
+        #     "qualifications" : self.qualifications,
+        #     "qualifications_info" : self.degree_info,
+        #     "extra_info" : self.extra_info
+        # }
+
+        response = {
             "name" : self.name,
             "experience" : self.experience,
             "address" : self.address,
@@ -71,3 +88,5 @@ class Cvscan():
             "qualifications_info" : self.degree_info,
             "extra_info" : self.extra_info
         }
+        json_response = json.dumps(response, sort_keys=True)
+        return json_response
