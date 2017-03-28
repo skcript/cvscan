@@ -40,10 +40,10 @@ def parse(name):
 
 @main.command()
 @click.option('--org','-o',help='Explicitly add organizations')
-@click.option('--skill','-s',help='Add skills')
-@click.option('--job','-j',help='For adding jobs: -j <job:category>')
-@click.option('--qual','-q',help="Add qualifications")
-@click.option('--extra','-e',help = "Add Extra information")
+@click.option('--skill','-s', help='Add skills')
+@click.option('--job','-j', help='For adding jobs: -j <job:category>')
+@click.option('--qual','-q', help="Add qualifications")
+@click.option('--extra','-e', help = "Add Extra information")
 def add(org,skill,job,qual,extra):
   """
 
@@ -129,3 +129,25 @@ def remove(org,skill,job,qual,extra):
     do.remove_qualifications(qual.split(','))
   if extra:
     do.remove_extra(extra.split(','))
+
+@main.command()
+@click.option('--org','-o', is_flag=True, help='Show organizations')
+@click.option('--skill','-s', is_flag=True, help='Show skills')
+@click.option('--job','-j', is_flag=True, help='Show jobs')
+@click.option('--qual','-q', is_flag=True, help="Show qualifications")
+@click.option('--extra','-e', is_flag=True, help = "Show Extra information")
+def show(org,skill,job,qual,extra):
+  """
+  Show the data of the options selected
+  """
+  if org:
+    do.show_organizations()
+  if skill:
+    do.show_skills()
+  if job:
+    do.show_jobs()
+  if qual:
+    do.show_qualifications()
+  if extra:
+    do.show_extra()
+

@@ -10,7 +10,7 @@ import logging
 import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
-DATAPATH = dirpath.PKGPATH + '/data/'
+DATAPATH = dirpath.DATAPATH + '/'
 
 """
 
@@ -255,3 +255,56 @@ def remove_extra(extra_info):
   with open(DATAPATH + 'extra/extra','wb') as fp:
     pickle.dump(extra, fp)
   logging.debug("extra file written")
+
+
+"""
+An Utility function to show organizations.
+
+"""
+def show_organizations():
+  with open(DATAPATH + 'organizations/explicit_organizations','rb') as fp:
+    organizations = pickle.load(fp)
+  
+  print '::'.join(organizations)
+
+"""
+An Utility function to show Skills.
+
+"""
+def show_skills():
+  with open(DATAPATH +'skills/skills','rb') as fp:
+    skills = pickle.load(fp)
+  
+  print '::'.join(skills)
+
+"""
+An Utility function to show jobs.
+
+"""
+def show_jobs():
+  with open(DATAPATH +'job_positions/positions','rb') as fp:
+    jobs = pickle.load(fp)
+  
+  print '::'.join(jobs)
+
+"""
+An Utility function to show qualifications.
+
+"""
+def show_qualifications():
+  with open(DATAPATH + 'qualifications/degree','rb') as fp:
+    qualifications = pickle.load(fp)
+  
+  print '::'.join(qualifications)
+
+"""
+An Utility function to show extras.
+
+"""
+def show_extras():
+  with open(DATAPATH + 'extra/extra','rb') as fp:
+    extra = pickle.load(fp)
+  
+  print '::'.join(extra)
+
+
