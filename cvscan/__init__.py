@@ -9,13 +9,14 @@ import converter
 import annotations_parser
 import details_parser as dp
 import language_parser as lp
-
+import json
 import dirpath
 import configurations
 
 class Cvscan():
     def __init__(self, name, path = dirpath.RESUMEPATH):
         self.path = path + '/' + name + '.pdf'
+        self.path = name + '.pdf'
 
         if self.exists():
             self.extract()
@@ -55,7 +56,7 @@ class Cvscan():
 
     # TODO: Add more fetch here
     def show(self):
-        return {
+        return json.dumps({
             "name" : self.name,
             "experience" : self.experience,
             "address" : self.address,
@@ -70,4 +71,4 @@ class Cvscan():
             "qualifications" : self.qualifications,
             "qualifications_info" : self.degree_info,
             "extra_info" : self.extra_info
-        }
+        })
