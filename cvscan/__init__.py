@@ -4,7 +4,7 @@
 Main program
 
 """
-
+import json
 import converter
 import annotations_parser
 import details_parser as dp
@@ -55,7 +55,7 @@ class Cvscan():
 
     # TODO: Add more fetch here
     def show(self):
-        return {
+        return json.dumps({
             "name" : self.name,
             "experience" : self.experience,
             "address" : self.address,
@@ -70,4 +70,4 @@ class Cvscan():
             "qualifications" : self.qualifications,
             "qualifications_info" : self.degree_info,
             "extra_info" : self.extra_info
-        }
+        })

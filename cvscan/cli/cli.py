@@ -7,6 +7,7 @@ Cvscan command line tool
 
 import click
 import pprint
+import os
 
 from cvscan import Cvscan
 from cvscan import data_operations as do
@@ -21,10 +22,25 @@ def main():
     """Cvscan command line tool."""
     pass
 
+@main.command()
+@click.option('--path', '-p', help='Parse resume')
+def parsepath(path):
+  """
+  Parse resume\n
+  Params: name Type: string\n
+  Usage: cvscan parse --name <name>\n
+  to parse file: ~/cvscan/<name>.pdf
+  
+  """
+  directory, name = os.path.split(path)
+  name = name.split('.')[0]
+  resume = Cvscan(name, directory)
+  resume.parse()
+  pprint.pprint(resume.show(), width=1)
 
 @main.command()
 @click.option('--name', '-n', help='Parse resume')
-def parse(name):
+def parsename(name):
   """
 
   Parse resume\n
