@@ -11,6 +11,7 @@ import os
 
 from cvscan import Cvscan
 from cvscan import data_operations as do
+from cvscan import details_parser as dp
 
 # Disable the warning that Click displays (as of Click version 5.0) when users
 # use unicode_literals in Python 2.
@@ -52,6 +53,12 @@ def parsename(name):
   resume = Cvscan(name)
   resume.parse()
   pprint.pprint(resume.show(), width=1)
+
+@main.command()
+@click.option('--sentence', '-g')
+def fetch(sentence):
+  skills = dp.fetch_skills(sentence)
+  pprint.pprint(skills)
 
 
 @main.command()
