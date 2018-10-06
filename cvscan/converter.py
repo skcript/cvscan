@@ -7,14 +7,14 @@ A utility to convert the given resume into text file.
 import re
 import logging
 
-import configurations as regex
+from . import configurations as regex
 
 # for converting pdfs to text
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
-from cStringIO import StringIO
+from io import StringIO
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -57,6 +57,6 @@ def pdf_to_txt(file_name):
 
     return pdf_txt.decode('ascii', errors='ignore')
 
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Error converting pdf to txt: '+str(exception_instance))
     return ''

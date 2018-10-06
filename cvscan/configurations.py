@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 """
 
@@ -22,7 +23,7 @@ def isfile(path):
 # Regular expressinos used
 bullet = r"\(cid:\d{0,2}\)"
 email = r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}"
-def get_phone(i,j,n):
+def get_phone():
   # regex explanation in order:
   # optional braces open
   # optional +
@@ -34,7 +35,9 @@ def get_phone(i,j,n):
   # j digits
   # optional whitespace separator
   # n-i-j digits
-  return r"\(?(\+)?(\d{1,3})?\)?[\s-]{0,1}?(\d{"+str(i)+"})[\s\.-]{0,1}(\d{"+str(j)+"})[\s\.-]{0,1}(\d{"+str(n-i-j)+"})"
+
+  return r"((0|\+33)[1-9][-.\s]?(\d{2}[-.\s]?){3}\d{2})"
+  #return r"\(?(\+)?(\d{1,3})?\)?[\s-]{0,1}?(\d{"+str(i)+"})[\s\.-]{0,1}(\d{"+str(j)+"})[\s\.-]{0,1}(\d{"+str(n-i-j)+"})"
 
 not_alpha_numeric = r'[^a-zA-Z\d]'
 number = r'\d+'
@@ -45,8 +48,8 @@ number = r'\d+'
 pincode = r"[^\d]"+not_alpha_numeric+"(\d{6})"+not_alpha_numeric
 
 # For finding date ranges
-months_short = r'(jan)|(feb)|(mar)|(apr)|(may)|(jun)|(jul)|(aug)|(sep)|(oct)|(nov)|(dec)'
-months_long = r'(january)|(february)|(march)|(april)|(may)|(june)|(july)|(august)|(september)|(october)|(november)|(december)'
+months_short = r'(jan)|(fev)|(mar)|(avr)|(mai)|(jun)|(juil)|(aug)|(sep)|(oct)|(nov)|(dec)'
+months_long = r'(janvier)|(février)|(mars)|(avril)|(mai)|(juin)|(juillet)|(août)|(septembre)|(octobre)|(novembre)|(decembre)'
 month = r'('+months_short+r'|'+months_long+r')'
 year = r'((20|19)(\d{2})|(\d{2}))'
 start_date = month+not_alpha_numeric+r"?"+year

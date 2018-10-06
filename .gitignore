@@ -90,4 +90,4 @@ ENV/
 
 # test Resume
 cvscan/data/sample/test*
-
+.idea

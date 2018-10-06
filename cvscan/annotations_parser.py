@@ -29,7 +29,7 @@ def fetch_pdf_urls(file_name):
 
     # fetches URLs
     for page in pdf_pages:
-      if 'Annots' in page.attrs.keys():
+      if 'Annots' in list(page.attrs.keys()):
         link_object_list = page.attrs['Annots']
         # Due to implementation of pdfminer the link_object_list can either
         # be the list directly or a PDF Object reference
@@ -43,6 +43,6 @@ def fetch_pdf_urls(file_name):
     file_pointer.close()
     return links
 
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Error while fetching URLs : '+str(exception_instance))
     return ''

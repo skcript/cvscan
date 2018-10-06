@@ -7,7 +7,7 @@ Contains util functions for manipulating the data used by cvscan
 import pickle
 import logging
 
-import dirpath
+from . import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 DATAPATH = dirpath.PKGPATH + '/data/'
@@ -128,12 +128,12 @@ def add_jobs(jobs_to_add):
     jobs = pickle.load(fp)
   logging.debug("positions file loaded")
 
-  for job,category in jobs_to_add.iteritems():
-    if job.lower() in jobs.keys() and category.lower() != jobs[job]:
+  for job,category in jobs_to_add.items():
+    if job.lower() in list(jobs.keys()) and category.lower() != jobs[job]:
       logging.debug("Job category of "+job+" has been changed from "+
         jobs[job]+" to "+category)
       jobs[job] = category
-    elif job.lower() not in jobs.keys():
+    elif job.lower() not in list(jobs.keys()):
       jobs[job.lower()] = category.lower()
       logging.debug("added "+job+" - "+category)
 
@@ -156,7 +156,7 @@ def remove_jobs(jobs_to_remove):
   logging.debug("positions file loaded")
 
   for job in jobs_to_remove:
-    if job.lower() in jobs.keys():
+    if job.lower() in list(jobs.keys()):
       del jobs[job.lower()]
       logging.debug("deleted "+job+" from the positions file")
 

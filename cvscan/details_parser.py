@@ -8,9 +8,9 @@ import re
 import pickle
 import logging
 from datetime import date
-import configurations as regex
+from . import configurations as regex
 
-import dirpath
+from . import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -31,7 +31,7 @@ def fetch_email(resume_text):
       resume_text = resume_text[result.end():]
       result = re.search(regular_expression, resume_text)
     return emails
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue parsing email: ' + str(exception_instance))
     return []
 
@@ -45,7 +45,7 @@ returns: phone number type:string
 """
 def fetch_phone(resume_text):
   try:
-    regular_expression = re.compile(regex.get_phone(3, 3, 10), re.IGNORECASE)
+    regular_expression = re.compile(regex.get_phone(), re.IGNORECASE)
     result = re.search(regular_expression, resume_text)
     phone = ''
     if result:
@@ -56,7 +56,7 @@ def fetch_phone(resume_text):
     if phone is '':
       for i in range(1, 10):
         for j in range(1, 10-i):
-          regular_expression =re.compile(regex.get_phone(i, j, 10), re.IGNORECASE)
+          regular_expression =re.compile(regex.get_phone(), re.IGNORECASE)
           result = re.search(regular_expression, resume_text)
           if result:
             result = result.groups()
@@ -66,7 +66,7 @@ def fetch_phone(resume_text):
           if phone is not '':
             return phone
     return phone
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue parsing phone number: ' + resume_text +
       str(exception_instance))
     return None
@@ -140,7 +140,7 @@ def fetch_address(resume_text):
     if (pos != -1) and(pos < state_pos) and if_separate_word(pos, state):
       state_pos = pos
       result_state = state
-  for district in district_states.keys():
+  for district in list(district_states.keys()):
     pos = resume_text.find(district)
     if (pos != -1) and (pos < district_pos) and if_separate_word(pos, district):
       district_pos = pos
@@ -164,7 +164,7 @@ returns: experience type:int
 def calculate_experience(resume_text):
   #
   def get_month_index(month):
-    month_dict = {'jan':1, 'feb':2, 'mar':3, 'apr':4, 'may':5, 'jun':6, 'jul':7, 'aug':8, 'sep':9, 'oct':10, 'nov':11, 'dec':12}
+    month_dict = {'jan':1, 'fev':2, 'mar':3, 'avr':4, 'mai':5, 'jun':6, 'juil':7, 'aug':8, 'sep':9, 'oct':10, 'nov':11, 'dec':12}
     return month_dict[month.lower()]
 
   try:
@@ -204,7 +204,7 @@ def calculate_experience(resume_text):
       regex_result = re.search(regular_expression, resume_text)
 
     return end_year - start_year  # Use the obtained month attribute
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
     return None
 
@@ -223,7 +223,7 @@ def fetch_jobs(cleaned_resume):
 
   job_positions = []
   positions = []
-  for job in jobs.keys():
+  for job in list(jobs.keys()):
     job_regex = r'[^a-zA-Z]'+job+r'[^a-zA-Z]'
     regular_expression = re.compile(job_regex, re.IGNORECASE)
     regex_result = re.search(regular_expression, cleaned_resume)
@@ -235,14 +235,14 @@ def fetch_jobs(cleaned_resume):
   # For finding the most frequent job category
   hash_jobs = {}
   for job in job_positions:
-    if jobs[job.lower()] in hash_jobs.keys():
+    if jobs[job.lower()] in list(hash_jobs.keys()):
       hash_jobs[jobs[job.lower()]] += 1
     else:
       hash_jobs[jobs[job.lower()]] = 1
 
   # To avoid the "Other" category and 'Student' category from
   # becoming the most frequent one.
-  if 'Student' in hash_jobs.keys():
+  if 'Student' in list(hash_jobs.keys()):
     hash_jobs['Student'] = 0
   hash_jobs['Other'] = -1
 
