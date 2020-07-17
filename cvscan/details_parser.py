@@ -8,9 +8,9 @@ import re
 import pickle
 import logging
 from datetime import date
-import configurations as regex
+from cvscan import configurations as regex
 
-import dirpath
+from cvscan import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -31,7 +31,7 @@ def fetch_email(resume_text):
       resume_text = resume_text[result.end():]
       result = re.search(regular_expression, resume_text)
     return emails
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue parsing email: ' + str(exception_instance))
     return []
 
@@ -66,7 +66,7 @@ def fetch_phone(resume_text):
           if phone is not '':
             return phone
     return phone
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue parsing phone number: ' + resume_text +
       str(exception_instance))
     return None
@@ -136,12 +136,12 @@ def fetch_address(resume_text):
   result_district = ''
   district_pos = len(resume_text)
   for state in states:
-    pos = resume_text.find(state)
+    pos = resume_text.find(str(state))
     if (pos != -1) and(pos < state_pos) and if_separate_word(pos, state):
       state_pos = pos
       result_state = state
   for district in district_states.keys():
-    pos = resume_text.find(district)
+    pos = resume_text.find(str(district))
     if (pos != -1) and (pos < district_pos) and if_separate_word(pos, district):
       district_pos = pos
       result_district = district
@@ -204,7 +204,7 @@ def calculate_experience(resume_text):
       regex_result = re.search(regular_expression, resume_text)
 
     return end_year - start_year  # Use the obtained month attribute
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
     return None
 
@@ -264,7 +264,8 @@ def fetch_skills(cleaned_resume):
   for skill in skills:
     skill = ' '+skill+' '
     if skill.lower() in cleaned_resume:
-      skill_set.append(skill)
+      if skill.strip():
+        skill_set.append(skill.strip())
   return skill_set
 
 
@@ -285,7 +286,7 @@ def fetch_qualifications(resume_text):
   degree = []
   info = []
   for qualification in qualifications:
-    qual_regex = r'[^a-zA-Z]'+qualification+r'[^a-zA-Z]'
+    qual_regex = r'[^a-zA-Z]'+str(qualification)+r'[^a-zA-Z]'
     regular_expression = re.compile(qual_regex, re.IGNORECASE)
     regex_result = re.search(regular_expression, resume_text)
     while regex_result:
@@ -307,8 +308,11 @@ returns: extra_information Type: List of strings
 
 """
 def fetch_extra(resume_text):
-  with open(dirpath.PKGPATH + '/data/extra/extra', 'rb') as fp:
-    extra = pickle.load(fp)
+  try:
+    with open(dirpath.PKGPATH + '/data/extra/extra', 'rb') as fp:
+      extra = pickle.load(fp)
+  except:
+      extra = []
 
   extra_information = []
   for info in extra:

@@ -80,7 +80,7 @@ def add(org,skill,job,qual,extra):
         _job = _job.split(':')
         jobs[_job[0]] = _job[1]
       except Exception:
-        print "Something wnet wrong: " + Exception
+        print("Something wnet wrong: " + Exception)
     do.add_jobs(jobs)
   if qual:
     do.add_qualifications(qual.split(','))

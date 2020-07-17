@@ -39,10 +39,10 @@ def fetch_pdf_urls(file_name):
           if type(link_object) is not dict:
             link_object = link_object.resolve()
           if link_object['A']['URI']:
-            links.append(link_object['A']['URI'])
+            links.append(link_object['A']['URI'].decode())
     file_pointer.close()
     return links
 
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Error while fetching URLs : '+str(exception_instance))
-    return ''
+    return []
