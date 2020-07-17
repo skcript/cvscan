@@ -1,4 +1,4 @@
 nltk==3.2.1
-pdfminer==20140328
+pdfminer==20191010
 wheel==0.24.0
 numpy==1.11.3

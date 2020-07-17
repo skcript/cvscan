@@ -7,7 +7,7 @@ Contains util functions for manipulating the data used by cvscan
 import pickle
 import logging
 
-import dirpath
+from cvscan import dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 DATAPATH = dirpath.PKGPATH + '/data/'

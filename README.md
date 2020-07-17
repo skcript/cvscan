@@ -12,6 +12,20 @@ Eg: ~/cvpath/data/sample/a.pdf is parsed by
 ```bash
 cvscan parse --name data/sample/a
 ```
+Output of parsing the sample inside data/sample is also provided in the `output.json` file.
+
+## Installing NLTK related packages.
+You can either download all the NLTK packages are choose only the ones listed below to use the cvscan library.
+
+```
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('universal_tagset')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+nltk.download('stopwords')
+```
 
 Data Manipulations
 ===============

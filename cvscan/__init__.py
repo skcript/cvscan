@@ -4,19 +4,18 @@
 Main program
 
 """
+import os
 
-import converter
-import annotations_parser
-import details_parser as dp
-import language_parser as lp
-import json
-import dirpath
-import configurations
+from cvscan import converter
+from cvscan import annotations_parser
+from cvscan import details_parser as dp
+from cvscan import language_parser as lp
+from cvscan import dirpath
+from cvscan import configurations
 
 class Cvscan():
     def __init__(self, name, path = dirpath.RESUMEPATH):
-        self.path = path + '/' + name + '.pdf'
-        self.path = name + '.pdf'
+        self.path = os.path.join(path, name)
 
         if self.exists():
             self.extract()
@@ -56,7 +55,7 @@ class Cvscan():
 
     # TODO: Add more fetch here
     def show(self):
-        return json.dumps({
+        return {
             "name" : self.name,
             "experience" : self.experience,
             "address" : self.address,
@@ -71,4 +70,4 @@ class Cvscan():
             "qualifications" : self.qualifications,
             "qualifications_info" : self.degree_info,
             "extra_info" : self.extra_info
-        })
+        }

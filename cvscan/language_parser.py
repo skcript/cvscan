@@ -12,7 +12,7 @@ import re
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 
-import utilities
+from cvscan import utilities
 
 logging.basicConfig(level=logging.DEBUG)
 
