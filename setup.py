@@ -25,6 +25,6 @@ setup(
         ],
     },
     install_requires=(
-    	['click','nltk==3.2.1','pdfminer==20140328','wheel==0.24.0','numpy==1.11.3']
+    	['click','nltk==3.4.5','pdfminer==20140328','wheel==0.24.0','numpy==1.11.3']
     )
 )
